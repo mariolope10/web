@@ -1,0 +1,12 @@
+.foto-container {
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.foto-container img {
+    cursor: pointer;
+}
+
+#serie-fotos-container {
+    margin-bottom: 1.25rem;
+}

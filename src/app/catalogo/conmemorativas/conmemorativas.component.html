@@ -1,0 +1,15 @@
+<section class="page-with-tabs">
+    <div class="page-title">
+        <h2>{{titulo}}</h2>
+    </div>
+    <div class="container" #content></div>
+    <smd-fab-speed-dial>
+        <smd-fab-trigger>
+            <button md-fab color="warn"><md-icon>filter_list</md-icon></button>
+        </smd-fab-trigger>
+        <smd-fab-actions>
+            <button md-mini-fab color="warn" (click)="loadConmemorativasPaisComponent()">Pais</button>
+            <button md-mini-fab color="warn" (click)="loadConmemorativasAnoComponent()">Año</button>
+        </smd-fab-actions>
+    </smd-fab-speed-dial>
+</section>

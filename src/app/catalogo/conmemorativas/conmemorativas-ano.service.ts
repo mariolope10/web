@@ -7,12 +7,12 @@ import {Observable} from "rxjs/Rx";
 import {Moneda} from "app/models/moneda";
 
 @Injectable()
-export class ConmemorativasPaisService {
+export class ConmemorativasAnosService {
     
     constructor(private jwtHttp: JwtHttp) {}
-
-    getListadoMonedasPaises(): Observable<Array<{pais: string, monedas: Moneda[]}>> {
-        const url = environment.apiEndpoint + "moneda/conmemorativas";
+    
+    getListadoMonedasAnos(): Observable<Array<{ano: number, monedas: Moneda[]}>> {
+        const url = environment.apiEndpoint + "moneda/conmemorativas?orden=ano";
 
         return this.jwtHttp
             .get(url)

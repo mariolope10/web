@@ -8,7 +8,6 @@ import 'datatables.net-responsive';
 import 'datatables.net-fixedcolumns';
 import 'easyzoom';
 import {ActivatedRoute} from "@angular/router";
-import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/conmemorativas.pais.service";
 
 @Component({
     selector: 'conmemorativas-pais',
@@ -75,7 +74,7 @@ export class ConmemorativasPaisComponent implements OnInit {
     dataTables: any;
     imagenesDataTables: any;
 
-    constructor(private conmemorativasPaisService: ConmemorativasPaisService, private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute) {}
 
     @ViewChildren('datatable') datatables;
     @ViewChildren('divimagen') imagenes;
@@ -109,90 +108,5 @@ export class ConmemorativasPaisComponent implements OnInit {
 
     ngOnInit(): void {
         this.datos = this.route.snapshot.data['listadoMonedasPaises'];
-    }
-
-    getMonedas(): void {
-        this.conmemorativasPaisService
-            .getListadoMonedasPaises()
-            .subscribe(
-            datos => this.datos = datos,
-            error => {
-                console.error('An error occurred in heroes component, navigating to login: ', error);
-            }
-            );
-
-        /*this.datos = [
-            {
-                "pais": "España",
-                "monedas": [
-                    {
-                        "id": 1,
-                        "pais": "ES",
-                        "imagen": "http://img03.euro-muenzen.tv/Spain-2-Euro-Coin-Don-Quixote-2005-2730010-146373242475195.jpg",
-                        "tirada": 1000000,
-                        "fecha_emision": "06/06/2005",
-                        "motivo": "Don Quijote de La Mancha"
-                    },
-                    {
-                        "id": 2,
-                        "pais": "ES",
-                        "imagen": "http://img01.euro-muenzen.tv/Spain-2-Euro-Coin-Treaty-of-Rome-2007-2730050-145572899188997.gif",
-                        "tirada": 5000000,
-                        "fecha_emision": "09/02/2006",
-                        "motivo": "Mi motivo"
-                    },
-                    {
-                        "id": 3,
-                        "pais": "ES",
-                        "imagen": "http://img03.euro-muenzen.tv/Spain-2-Euro-Coin-10-Years-Euro-WWU-EMU-2009-2730080-146373248647878.jpg",
-                        "tirada": 15000,
-                        "fecha_emision": "11/12/2007",
-                        "motivo": "10º aniversario del Euro"
-                    }
-                ]
-            },
-            {
-                "pais": "Francia",
-                "monedas": [
-                    {
-                        "id": 1,
-                        "pais": "ES",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "06/06/2017",
-                        "motivo": "Mi motivo"
-                    },
-                    {
-                        "id": 2,
-                        "pais": "FR",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "06/06/2017",
-                        "motivo": "Mi motivo"
-                    }
-                ]
-            },
-            {
-                "pais": "Andorra",
-                "monedas": [
-                    {
-                        "id": 1,
-                        "pais": "ES",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "06/06/2017",
-                        "motivo": "Mi motivo"
-                    },
-                    {
-                        "id": 2,
-                        "pais": "FR",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "06/06/2017",
-                        "motivo": "Mi motivo"
-                    }
-                ]
-            }
-        ];*/
     }
 }

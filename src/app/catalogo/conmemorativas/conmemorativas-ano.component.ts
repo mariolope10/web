@@ -1,5 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, ViewChildren, OnInit} from '@angular/core';
 import {Moneda} from "app/models/moneda";
+
+import * as jQuery from 'jquery';
+import 'datatables.net';
+import 'datatables.net-buttons';
+import 'datatables.net-responsive';
+import 'datatables.net-fixedcolumns';
+import 'easyzoom';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'conmemorativas-ano',
@@ -15,98 +23,85 @@ import {Moneda} from "app/models/moneda";
         <md-tab *ngFor="let dato of datos" label="{{dato.ano}}">
             <section class="container-fluid">
                 <div class="article-title">{{dato.ano}}</div>
-                <div class="box box-default table-box table-responsive mdl-shadow--2dp">
-                    <table class="mdl-data-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th class="mdl-data-table__cell--non-numeric">Pais</th>
-                                <th class="mdl-data-table__cell--non-numeric">Imagen</th>
-                                <th class="mdl-data-table__cell--non-numeric">Tirada</th>
-                                <th class="mdl-data-table__cell--non-numeric">Fecha de emisión</th>
-                                <th class="mdl-data-table__cell--non-numeric">Motivo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let moneda of dato.monedas">
-                                <td>{{moneda.id}}</td>
-                                <td class="mdl-data-table__cell--non-numeric">{{moneda.pais}}</td>
-                                <td class="mdl-data-table__cell--non-numeric"><img src="{{moneda.imagen}}"/></td>
-                                <td class="mdl-data-table__cell--non-numeric">{{moneda.tirada}}</td>
-                                <td class="mdl-data-table__cell--non-numeric">{{moneda.fecha_emision}}</td>
-                                <td class="mdl-data-table__cell--non-numeric">{{moneda.motivo}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table #datatable class="tabla-monedas display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Pais</th>
+                            <th>Tirada</th>
+                            <th>Fecha de emisión</th>
+                            <th>Motivo</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Pais</th>
+                            <th>Tirada</th>
+                            <th>Fecha de emisión</th>
+                            <th>Motivo</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let moneda of dato.monedas | orderBy : ['pais']">
+                            <td>
+                                <div #divimagen class="easyzoom easyzoom--overlay">
+                                    <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
+                                        <img src="{{moneda.imagen}}"/>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>{{moneda.pais}}</td>
+                            <td>{{moneda.tirada}}</td>
+                            <td>{{moneda.fecha_emision | date: 'dd MMMM yyyy'}}</td>
+                            <td>{{moneda.motivo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </md-tab>
     </md-tab-group>
   `,
 })
-export class ConmemorativasAnoComponent {
+export class ConmemorativasAnoComponent implements OnInit {
     datos: Array<{ano: number, monedas: Moneda[]}>;
     
-    constructor() {}
+    dataTables: any;
+    imagenesDataTables: any;
     
-    ngOnInit(): void {
-        this.getMonedas();
+    constructor(private route: ActivatedRoute) {}
+    
+    @ViewChildren('datatable') datatables;
+    @ViewChildren('divimagen') imagenes;
+    
+    ngAfterViewInit() {
+        // ZOOM
+        this.imagenesDataTables = jQuery(this.imagenes.toArray().map(x => x.nativeElement));
+        this.imagenesDataTables.easyZoom({
+            loadingNotice: 'Cargando imagen',
+            errorNotice: 'Se ha producido un error al cargar la imagen'
+        });
+
+        // DATATABLES
+        this.dataTables = jQuery(this.datatables.toArray().map(x => x.nativeElement));
+        this.dataTables.DataTable({
+            autoWidth: false,
+            paging: false,
+            info: false,
+            searching: false,
+            responsive: true,
+            order: [[1, 'desc']],
+            columns: [
+                {orderable: false, width: "15%"},
+                {orderable: true, width: "15%"},
+                {orderable: false, width: "15%"},
+                {orderable: false, width: "15%"},
+                {orderable: false, width: "40%"}
+            ]
+        });
     }
     
-    getMonedas(): void {
-        /*this.heroService
-            .getHeroes()
-            .then(
-            heroes => this.heroes = heroes,
-            error => {
-                this.router.navigate(['login']);
-                console.error('An error occurred in heroes component, navigating to login: ', error);
-            }
-            );*/
-
-        this.datos = [
-            {
-                "ano": 2004,
-                "monedas": [
-                    {
-                        "id": 1,
-                        "pais": "ES",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "12 septiembre 2008",
-                        "motivo": "Mi motivo"
-                    },
-                    {
-                        "id": 2,
-                        "pais": "FR",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "02 Agosto 2004",
-                        "motivo": "Mi motivo"
-                    }
-                ]
-            },
-            {
-                "ano": 2004,
-                "monedas": [
-                    {
-                        "id": 1,
-                        "pais": "ES",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "12 septiembre 2008",
-                        "motivo": "Mi motivo"
-                    },
-                    {
-                        "id": 2,
-                        "pais": "FR",
-                        "imagen": "https://upload.wikimedia.org/wikipedia/de/9/94/2_euro_coin_Gr_serie_1a.png",
-                        "tirada": 1000000,
-                        "fecha_emision": "02 Agosto 2004",
-                        "motivo": "Mi motivo"
-                    }
-                ]
-            }
-        ];
+    ngOnInit(): void {
+        this.datos = this.route.snapshot.data['listadoMonedasAnos'];
     }
 }

@@ -61,7 +61,7 @@ export class AuthenticationService {
     }
     
     getMe(): Observable<boolean> {
-        const url = environment.apiEndpoint + "me";
+        const url = environment.apiEndpoint + "user/me";
 
         return this.jwtHttp
             .get(url)

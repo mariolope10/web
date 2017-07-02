@@ -43,7 +43,7 @@ import {ActivatedRoute} from "@angular/router";
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr *ngFor="let moneda of dato.monedas | orderBy : ['pais']">
+                        <tr *ngFor="let moneda of dato.monedas">
                             <td>
                                 <div #divimagen class="easyzoom easyzoom--overlay">
                                     <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
@@ -51,7 +51,7 @@ import {ActivatedRoute} from "@angular/router";
                                     </a>
                                 </div>
                             </td>
-                            <td>{{moneda.pais}}</td>
+                            <td>{{moneda.pais.nombre}}</td>
                             <td>{{moneda.tirada}}</td>
                             <td>{{moneda.fecha_emision | date: 'dd MMMM yyyy'}}</td>
                             <td>{{moneda.motivo}}</td>

@@ -54,7 +54,7 @@
       <ul class="list-unstyled float-right">
         <li>
           <button md-button class="md-button header-btn" (click)="logout()">
-            <img src="assets/images/g1.jpg" alt="" class="rounded img30_30">
+            <img [src]="'user/image' | secure" alt="" class="rounded img30_30">
           </button>
         </li>
         <li><button md-button class="md-button header-btn hidden-lg-up" myOpenSearchOverlay><i class="material-icons">search</i></button></li>

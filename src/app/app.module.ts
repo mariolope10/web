@@ -51,6 +51,8 @@ import {AuthConfig} from 'angular2-jwt';
 import {JwtConfigService, JwtHttp} from 'angular2-jwt-refresh';
 import {CanActivateAuthGuard} from "app/can-activate.authguard";
 import {environment} from "environments/environment";
+import {SecurePipe} from "app/pipes/secure.pipe";
+import {UrlHelperService} from "app/layout/url-helper.service";
 
 @NgModule({
     imports: [
@@ -96,7 +98,9 @@ import {environment} from "environments/environment";
         DashboardComponent,
         InicioComponent,
         // Pages
-        PageLayoutFullscreenComponent
+        PageLayoutFullscreenComponent,
+        // Pipe carga imagen perfil
+        SecurePipe
     ],
     bootstrap: [AppComponent],
     providers: [
@@ -105,7 +109,9 @@ import {environment} from "environments/environment";
             useFactory: getJwtHttp,
             deps: [Http, RequestOptions]
         },
-        CanActivateAuthGuard
+        CanActivateAuthGuard,
+        // Servicio carga imagen perfil
+        UrlHelperService
     ]
 })
 

@@ -15,8 +15,8 @@ import {SmdFabSpeedDialComponent, SmdFabSpeedDialTrigger, SmdFabSpeedDialActions
 import {ConmemorativasAnoComponent} from "app/catalogo/conmemorativas/conmemorativas-ano.component";
 import {ConmemorativasPaisComponent} from "app/catalogo/conmemorativas/conmemorativas-pais.component";
 
-import {OrderByPipe} from "app/pipes/orderByPipe";
-import {KeysPipe} from "app/pipes/keysPipe";
+import {OrderByPipe} from "app/pipes/orderby.pipe";
+import {KeysPipe} from "app/pipes/key.pipe";
 
 import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/conmemorativas-pais.service";
 import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/conmemorativas-ano.service";

@@ -53,7 +53,7 @@ import {ActivatedRoute} from "@angular/router";
                             </td>
                             <td>{{moneda.pais.nombre}}</td>
                             <td>{{moneda.tirada}}</td>
-                            <td>{{moneda.fecha_emision | date: 'dd MMMM yyyy'}}</td>
+                            <td>{{moneda.fecha_emision | date: 'dd MMMM'}}</td>
                             <td>{{moneda.motivo}}</td>
                         </tr>
                     </tbody>
@@ -90,6 +90,9 @@ export class ConmemorativasAnoComponent implements OnInit {
             info: false,
             searching: false,
             responsive: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
             order: [[1, 'desc']],
             columns: [
                 {orderable: false, width: "15%"},

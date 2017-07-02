@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
-import {CatalogoRoutingModule, LoadMonedasConmemorativasPaisResolver, LoadMonedasConmemorativasAnosResolver} from './catalogo-routing.module';
+import {CatalogoRoutingModule, LoadMonedasConmemorativasPaisResolver, LoadMonedasConmemorativasAnosResolver, LoadSeriesResolver} from './catalogo-routing.module';
 import {CatalogoComponent} from './catalogo.component';
 
 import {CatalogoConmemorativasComponent} from './conmemorativas/conmemorativas.component';
@@ -20,6 +20,7 @@ import {KeysPipe} from "app/pipes/key.pipe";
 
 import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/conmemorativas-pais.service";
 import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/conmemorativas-ano.service";
+import {SeriesService} from "app/catalogo/series/series.service";
 
 @NgModule({
     imports: [
@@ -56,8 +57,10 @@ import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/conmemorati
         },
         ConmemorativasPaisService,
         ConmemorativasAnosService,
+        SeriesService,
         LoadMonedasConmemorativasPaisResolver,
-        LoadMonedasConmemorativasAnosResolver
+        LoadMonedasConmemorativasAnosResolver,
+        LoadSeriesResolver
     ]
 })
 

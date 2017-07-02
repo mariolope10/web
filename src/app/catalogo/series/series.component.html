@@ -8,7 +8,7 @@
                 <div class="box box-default">
                     <div class="box-body">
                         <md-tab-group class="mdl-shadow--2dp tab-group-series">
-                            <md-tab *ngFor="let serie of dato.series" label="{{serie.orden}}ª serie ({{serie.fechaEmisionDesde}} - {{serie.fechaEmisionHasta}})">
+                            <md-tab *ngFor="let serie of dato.series" label="{{serie.orden}}ª serie ({{serie.fecha_desde}} - {{serie.fecha_hasta}})">
                                 <div class="box-body">
                                     <div id="serie-fotos-container">
                                         <div class="row">
@@ -17,25 +17,25 @@
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>1 céntimo</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda1c)" style="width: 100%" src="{{serie.moneda1c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[0], '1 céntimo')" style="width: 100%" src="{{serie.monedas[0].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>2 céntimos</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda2c)" style="width: 100%" src="{{serie.moneda2c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[1], '2 céntimos')" style="width: 100%" src="{{serie.monedas[1].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>5 céntimos</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda5c)" style="width: 100%" src="{{serie.moneda5c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[2], '5 céntimos')" style="width: 100%" src="{{serie.monedas[2].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>10 céntimos</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda10c)" style="width: 100%" src="{{serie.moneda10c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[3], '10 céntimos')" style="width: 100%" src="{{serie.monedas[3].imagen}}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -45,25 +45,25 @@
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>20 céntimos</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda20c)" style="width: 100%" src="{{serie.moneda20c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[4], '20 céntimos')" style="width: 100%" src="{{serie.monedas[4].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>50 céntimos</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda50c)" style="width: 100%" src="{{serie.moneda50c.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[5], '50 céntimos')" style="width: 100%" src="{{serie.monedas[5].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>1 euro</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda1e)" style="width: 100%" src="{{serie.moneda1e.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[6], '1 euro')" style="width: 100%" src="{{serie.monedas[6].imagen}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="foto-container">
                                                             <p>2 euros</p>
-                                                            <img (click)="openDialogoDetalle(serie.moneda2e)" style="width: 100%" src="{{serie.moneda2e.imagen}}"/>
+                                                            <img (click)="openDialogoDetalle(serie.monedas[7], '2 euros')" style="width: 100%" src="{{serie.monedas[7].imagen}}"/>
                                                         </div>
                                                     </div>
                                                 </div>      

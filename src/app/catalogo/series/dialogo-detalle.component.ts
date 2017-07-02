@@ -11,6 +11,7 @@ import 'easyzoom';
 })
 export class DialogoDetalleComponent implements AfterViewInit {
     moneda: MonedaSerie;
+    valor: string;
 
     easyZoomElement: any;
 

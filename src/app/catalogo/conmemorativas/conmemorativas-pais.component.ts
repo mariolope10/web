@@ -95,6 +95,9 @@ export class ConmemorativasPaisComponent implements OnInit {
             info: false,
             searching: false,
             responsive: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            },
             order: [[1, 'desc']],
             columns: [
                 {orderable: false, width: "15%"},

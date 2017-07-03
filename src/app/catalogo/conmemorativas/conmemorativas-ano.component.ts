@@ -65,15 +65,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ConmemorativasAnoComponent implements OnInit {
     datos: Array<{ano: number, monedas: Moneda[]}>;
-    
+
     dataTables: any;
     imagenesDataTables: any;
-    
+
     constructor(private route: ActivatedRoute) {}
-    
+
     @ViewChildren('datatable') datatables;
     @ViewChildren('divimagen') imagenes;
-    
+
     ngAfterViewInit() {
         // ZOOM
         this.imagenesDataTables = jQuery(this.imagenes.toArray().map(x => x.nativeElement));
@@ -103,8 +103,11 @@ export class ConmemorativasAnoComponent implements OnInit {
             ]
         });
     }
-    
+
     ngOnInit(): void {
-        this.datos = this.route.snapshot.data['listadoMonedasAnos'];
+        this.route.data
+            .subscribe((data: {listadoMonedasAnos: Array<{ano: number, monedas: Moneda[]}>}) => {
+                this.datos = data.listadoMonedasAnos;
+            });
     }
 }

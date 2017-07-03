@@ -17,7 +17,10 @@ export class CatalogoSeriesComponent implements OnInit {
     constructor(public dialog: MdDialog, private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.datos = this.route.snapshot.data['listadoSeries'];
+        this.route.data
+            .subscribe((data: {listadoSeries: Array<{pais: string, series: Serie[]}>}) => {
+                this.datos = data.listadoSeries;
+            });
     }
 
     openDialogoDetalle(moneda: MonedaSerie, valor: string) {

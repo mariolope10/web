@@ -110,6 +110,9 @@ export class ConmemorativasPaisComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.datos = this.route.snapshot.data['listadoMonedasPaises'];
+        this.route.data
+            .subscribe((data: {listadoMonedasPaises: Array<{pais: string, monedas: Moneda[]}>}) => {
+                this.datos = data.listadoMonedasPaises;
+            });
     }
 }

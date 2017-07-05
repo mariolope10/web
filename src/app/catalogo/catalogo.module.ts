@@ -3,24 +3,20 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
-import {CatalogoRoutingModule, LoadMonedasConmemorativasPaisesResolver, LoadMonedasConmemorativasAnosResolver, LoadSeriesResolver} from './catalogo-routing.module';
+import {CatalogoRoutingModule, LoadConmemorativasPaisResolver, LoadConmemorativasAnosResolver} from './catalogo-routing.module';
 import {CatalogoComponent} from './catalogo.component';
-
-import {CatalogoConmemorativasComponent} from './conmemorativas/conmemorativas.component';
-import {CatalogoSeriesComponent} from './series/series.component';
 
 import {DialogoDetalleComponent} from "./series/dialogo-detalle.component";
 import {SmdFabSpeedDialComponent, SmdFabSpeedDialTrigger, SmdFabSpeedDialActions} from "./../fab-speed-dial/fab-speed-dial";
 
-import {ConmemorativasAnoComponent} from "app/catalogo/conmemorativas/conmemorativas-ano.component";
-import {ConmemorativasPaisComponent} from "app/catalogo/conmemorativas/conmemorativas-pais.component";
-
 import {OrderByPipe} from "app/pipes/orderby.pipe";
 import {KeysPipe} from "app/pipes/key.pipe";
-
-import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/conmemorativas-pais.service";
-import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/conmemorativas-ano.service";
-import {SeriesService} from "app/catalogo/series/series.service";
+import {ConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.component";
+import {ConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.component";
+import {DetalleConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/detalle/detalle-conmemorativas-ano.component";
+import {DetalleConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/detalle/detalle-conmemorativas-pais.component";
+import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.service";
+import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.service";
 
 @NgModule({
     imports: [
@@ -30,21 +26,23 @@ import {SeriesService} from "app/catalogo/series/series.service";
         CatalogoRoutingModule
     ],
     declarations: [
+        ConmemorativasAnoComponent,
+        ConmemorativasPaisComponent,
+        DetalleConmemorativasAnoComponent,
+        DetalleConmemorativasPaisComponent,
         CatalogoComponent,
-        CatalogoConmemorativasComponent,
-        CatalogoSeriesComponent,
         DialogoDetalleComponent,
         SmdFabSpeedDialComponent,
         SmdFabSpeedDialTrigger,
         SmdFabSpeedDialActions,
         KeysPipe,
-        OrderByPipe,
-        ConmemorativasAnoComponent,
-        ConmemorativasPaisComponent
+        OrderByPipe
     ],
     entryComponents: [
         DialogoDetalleComponent,
         SmdFabSpeedDialComponent,
+        DetalleConmemorativasAnoComponent,
+        DetalleConmemorativasPaisComponent,
         SmdFabSpeedDialTrigger,
         SmdFabSpeedDialActions,
         ConmemorativasAnoComponent,
@@ -55,12 +53,10 @@ import {SeriesService} from "app/catalogo/series/series.service";
             provide: LOCALE_ID,
             useValue: "es-ES"
         },
+        LoadConmemorativasPaisResolver,
+        LoadConmemorativasAnosResolver,
         ConmemorativasPaisService,
-        ConmemorativasAnosService,
-        SeriesService,
-        LoadMonedasConmemorativasPaisesResolver,
-        LoadMonedasConmemorativasAnosResolver,
-        LoadSeriesResolver
+        ConmemorativasAnosService
     ]
 })
 

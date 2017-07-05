@@ -1,0 +1,45 @@
+<section class="container-fluid with-maxwidth chapter">
+    <article class="article">
+        <h2 class="article-title">Monedas conmemorativas de {{monedas[0].pais.nombre}}</h2>
+    </article>
+    <table class="tabla-monedas display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Año</th>
+                <th>Día</th>
+                <th>Tirada</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Imagen</th>
+                <th>Año</th>
+                <th>Día</th>
+                <th>Tirada</th>
+                <th>Motivo</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngFor="let moneda of monedas | orderBy : ['fecha_emision']">
+                <td>
+                    <div #divimagen class="easyzoom easyzoom--overlay">
+                        <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
+                            <img src="{{moneda.imagen}}"/>
+                        </a>
+                    </div>
+                </td>
+                <td><strong>{{moneda.fecha_emision | date: 'yyyy'}}</strong></td>
+                <td>{{moneda.fecha_emision | date: 'dd MMMM'}}</td>
+
+                <td>
+                    <p>UNC: {{moneda.tirada_unc}}</p>
+                    <p>BU: {{moneda.tirada_bu}}</p>
+                    <p>PROOF: {{moneda.tirada_proof}}</p>
+                </td>
+                <td>{{moneda.motivo}}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

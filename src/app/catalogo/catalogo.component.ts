@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { CatalogoService } from './catalogo.service';
 
 import 'styles/font-awesome.scss';
 
 @Component({
-  selector: 'my-ui',
+  selector: 'catalogo',
   styles: [],
   template: `<router-outlet></router-outlet>`,
-  providers: [CatalogoService]
+  providers: []
 })
 
 export class CatalogoComponent {}

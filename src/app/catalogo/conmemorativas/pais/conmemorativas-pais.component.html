@@ -1,0 +1,91 @@
+<section class="container-fluid with-maxwidth chapter">
+    <article class="article">
+        <h2 class="article-title">Seleccione un pais</h2>
+        <div class="row">
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Alemania</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Austria</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Bélgica</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Chipre</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Eslovaquia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Eslovenia</button><div class="divider divider-sm"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md" [routerLink]="['/app/catalogo/conmemorativas/pais', 'es']">España</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Estonia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Finlandia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md" [routerLink]="['/app/catalogo/conmemorativas/pais', 'fr']">Francia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Grecia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Irlanda</button><div class="divider divider-sm"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Italia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Letonia</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Lituania</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Luxemburgo</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Malta</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Paises Bajos</button><div class="divider divider-sm"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Portugal</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Andorra</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">Mónaco</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">San Marino</button><div class="divider divider-sm"></div>
+            </div>
+            <div class="col-sm-2">
+                <button md-raised-button color="warn" class="btn-w-md">C. del Vaticano</button><div class="divider divider-sm"></div>
+            </div>
+        </div>
+    </article>
+    <smd-fab-speed-dial>
+        <smd-fab-trigger>
+            <button md-fab ><md-icon>filter_list</md-icon></button>
+        </smd-fab-trigger>
+        <smd-fab-actions>
+            <button md-mini-fab [routerLink]="['/app/catalogo/conmemorativas/pais']">Pais</button>
+            <button md-mini-fab [routerLink]="['/app/catalogo/conmemorativas/ano']">Año</button>
+        </smd-fab-actions>
+    </smd-fab-speed-dial>
+</section>

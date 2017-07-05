@@ -6,12 +6,12 @@ import {environment} from "environments/environment";
 import {Moneda} from "app/models/moneda";
 
 @Injectable()
-export class ConmemorativasAnosService {
+export class ConmemorativasPaisService {
     
     constructor(private jwtHttp: JwtHttp) {}
-    
-    getListadoMonedasAnos(): Promise<Array<{ano: number, monedas: Moneda[]}>> {
-        const url = environment.apiEndpoint + "moneda/conmemorativas?orden=ano";
+
+    getListadoMonedasPaises(codigo: string): Promise<Moneda[]> {
+        const url = environment.apiEndpoint + "moneda/conmemorativa/pais/" + codigo;
 
         return this.jwtHttp
             .get(url)

@@ -10,8 +10,8 @@ export class SeriesService {
     
     constructor(private jwtHttp: JwtHttp) {}
 
-    getListadoSeries(): Promise<Array<{pais: string, series: Serie[]}>> {
-        const url = environment.apiEndpoint + "series";
+    getListadoSeries(codigo: string): Promise<Serie[]> {
+        const url = environment.apiEndpoint + "series/" + codigo;
 
         return this.jwtHttp
             .get(url)

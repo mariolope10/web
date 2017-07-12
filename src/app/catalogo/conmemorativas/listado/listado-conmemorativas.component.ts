@@ -1,49 +1,41 @@
 import {Component, OnInit} from '@angular/core';
 import {Moneda} from "app/models/moneda";
 
+import {ActivatedRoute} from "@angular/router";
+import {MdDialog} from "@angular/material";
+
 import * as jQuery from 'jquery';
 import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-responsive';
 import 'datatables.net-fixedcolumns';
 import 'easyzoom';
-import {ActivatedRoute} from "@angular/router";
+import {DialogoDetalleConmemorativasComponent} from "app/catalogo/conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
 
 @Component({
-    selector: 'detalle-conmemorativas-ano',
+    selector: 'listado-conmemorativas',
     styles: [`
         img {
             width: 145px;
             height: auto;
+            cursor: pointer;
+        }
+        h2.article-title {
+            padding-top: 30px;
         }
         table.dataTable td {
             white-space: nowrap;
         }
     `
     ],
-    templateUrl: './detalle-conmemorativas-ano.component.html',
+    templateUrl: './listado-conmemorativas.component.html',
 })
-export class DetalleConmemorativasAnoComponent implements OnInit {
+export class ListadoConmemorativasComponent implements OnInit {
     monedas: Moneda[];
 
-    imagenesDataTables: any;
-    
-    ano: number;
-
-    constructor(private route: ActivatedRoute) {
-        this.ano = route.snapshot.params['ano'];
-    }
-
-    //@ViewChildren('divimagen') imagenes;
+    constructor(public dialog: MdDialog, private route: ActivatedRoute) {}
     
     ngAfterViewInit() {
-        // ZOOM
-        /*this.imagenesDataTables = jQuery(this.imagenes.toArray().map(x => x.nativeElement));
-        this.imagenesDataTables.easyZoom({
-            loadingNotice: 'Cargando imagen',
-            errorNotice: 'Se ha producido un error al cargar la imagen'
-        });*/
-
         // DATATABLES
         let tabla: any = jQuery('table');
         
@@ -69,8 +61,14 @@ export class DetalleConmemorativasAnoComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.data
-            .subscribe((data: {listadoMonedasAnos: Moneda[]}) => {
-                this.monedas = data.listadoMonedasAnos;
+            .subscribe((data: {listadoMonedas: Moneda[]}) => {
+                this.monedas = data.listadoMonedas;
             });
+    }
+    
+    openDialogoDetalle(moneda: Moneda) {
+        let dialogRef = this.dialog.open(DialogoDetalleConmemorativasComponent);
+        let instance = dialogRef.componentInstance;
+        instance.moneda = moneda;
     }
 }

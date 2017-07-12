@@ -6,9 +6,18 @@ import {environment} from "environments/environment";
 import {Moneda} from "app/models/moneda";
 
 @Injectable()
-export class ConmemorativasAnosService {
+export class ConmemorativasService {
     
     constructor(private jwtHttp: JwtHttp) {}
+
+    getListadoMonedasPaises(codigo: string): Promise<Moneda[]> {
+        const url = environment.apiEndpoint + "moneda/conmemorativa/pais/" + codigo;
+
+        return this.jwtHttp
+            .get(url)
+            .map(response => response.json())
+            .toPromise();
+    }
     
     getListadoMonedasAnos(ano: number): Promise<Moneda[]> {
         const url = environment.apiEndpoint + "moneda/conmemorativa/ano/" + ano;

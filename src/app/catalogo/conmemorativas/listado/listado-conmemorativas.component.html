@@ -1,6 +1,6 @@
 <section class="container-fluid with-maxwidth chapter">
     <article class="article">
-        <h2 class="article-title">Monedas conmemorativas del año {{ano}}</h2>
+        <h2 class="article-title">Monedas conmemorativas de {{monedas[0].pais.nombre}}</h2>
     </article>
     <table class="tabla-monedas display" cellspacing="0" width="100%">
         <thead>
@@ -24,20 +24,11 @@
         <tbody>
             <tr *ngFor="let moneda of monedas | orderBy : ['fecha_emision']">
                 <td>
-                    <div #divimagen class="easyzoom easyzoom--overlay">
-                        <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
-                            <img src="{{moneda.imagen}}"/>
-                        </a>
-                    </div>
+                    <img (click)="openDialogoDetalle(moneda)" src="{{moneda.imagen}}"/>
                 </td>
                 <td><strong>{{moneda.fecha_emision | date: 'yyyy'}}</strong></td>
                 <td>{{moneda.fecha_emision | date: 'dd MMMM'}}</td>
-
-                <td>
-                    <p>UNC: {{moneda.tirada_unc}}</p>
-                    <p>BU: {{moneda.tirada_bu}}</p>
-                    <p>PROOF: {{moneda.tirada_proof}}</p>
-                </td>
+                <td>{{moneda.tirada_unc + moneda.tirada_bu + moneda.tirada_proof}}</td>
                 <td>{{moneda.motivo}}</td>
             </tr>
         </tbody>

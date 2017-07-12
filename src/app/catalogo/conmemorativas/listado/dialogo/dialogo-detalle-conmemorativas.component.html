@@ -1,0 +1,52 @@
+<h1 md-dialog-title>Detalle {{moneda.valor.nombre_comun}} {{moneda.pais.nombre}} {{moneda.ano}}</h1>
+<div md-dialog-content class="text-center">
+    <div class="easyzoom easyzoom--overlay" style="margin-bottom: 20px">
+        <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
+            <img src="{{moneda.imagen}}" alt="Moneda {{moneda.valor.nombre_comun}}"/>
+        </a>
+    </div>
+    <div class="box box-default table-box table-responsive mdl-shadow--2dp">
+        <table class="mdl-data-table">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>Motivo</strong></td>
+                    <td class="mdl-data-table__cell--non-numeric">{{moneda.motivo}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>Ceca</strong></td>
+                    <td class="mdl-data-table__cell--non-numeric">{{moneda.ceca.nombre}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>Autor</strong></td>
+                    <td class="mdl-data-table__cell--non-numeric">{{moneda.autor}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>KM#</strong></td>
+                    <td class="mdl-data-table__cell--non-numeric">{{moneda.km}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="box box-default table-box table-responsive mdl-shadow--2dp">
+        <table class="mdl-data-table">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>UNC</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_unc}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>BU</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_bu}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>PROOF</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_proof}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div md-dialog-actions>
+    <button md-button (click)="dialogRef.close()">CERRAR</button>
+</div>

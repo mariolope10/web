@@ -3,20 +3,22 @@ import {CommonModule} from '@angular/common';
 import {MaterialModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
-import {CatalogoRoutingModule, LoadConmemorativasPaisResolver, LoadConmemorativasAnosResolver} from './catalogo-routing.module';
+import {CatalogoRoutingModule, ConmemorativasPaisResolver, ConmemorativasAnosResolver, SeriesResolver} from './catalogo-routing.module';
 import {CatalogoComponent} from './catalogo.component';
 
-import {DialogoDetalleComponent} from "./series/dialogo-detalle.component";
 import {SmdFabSpeedDialComponent, SmdFabSpeedDialTrigger, SmdFabSpeedDialActions} from "./../fab-speed-dial/fab-speed-dial";
 
 import {OrderByPipe} from "app/pipes/orderby.pipe";
 import {KeysPipe} from "app/pipes/key.pipe";
-import {ConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.component";
-import {ConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.component";
-import {DetalleConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/detalle/detalle-conmemorativas-ano.component";
-import {DetalleConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/detalle/detalle-conmemorativas-pais.component";
-import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.service";
-import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.service";
+import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
+import {ListadoConmemorativasComponent} from "app/catalogo/conmemorativas/listado/listado-conmemorativas.component";
+import {DialogoDetalleConmemorativasComponent} from "app/catalogo/conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
+import {FiltroPaisConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
+import {FiltroAnoConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
+import {FiltroPaisSeriesComponent} from "app/catalogo/series/filtro-pais/filtro-pais-series.component";
+import {ListadoSeriesComponent} from "app/catalogo/series/listado/listado-series.component";
+import {SeriesService} from "app/catalogo/series/series.service";
+import {DialogoDetalleSeriesComponent} from "app/catalogo/series/listado/dialogo/dialogo-detalle-series.component";
 
 @NgModule({
     imports: [
@@ -26,12 +28,14 @@ import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/ano/conmemo
         CatalogoRoutingModule
     ],
     declarations: [
-        ConmemorativasAnoComponent,
-        ConmemorativasPaisComponent,
-        DetalleConmemorativasAnoComponent,
-        DetalleConmemorativasPaisComponent,
         CatalogoComponent,
-        DialogoDetalleComponent,
+        FiltroAnoConmemorativasComponent,
+        FiltroPaisConmemorativasComponent,
+        FiltroPaisSeriesComponent,
+        ListadoConmemorativasComponent,
+        ListadoSeriesComponent,
+        DialogoDetalleSeriesComponent,
+        DialogoDetalleConmemorativasComponent,
         SmdFabSpeedDialComponent,
         SmdFabSpeedDialTrigger,
         SmdFabSpeedDialActions,
@@ -39,24 +43,27 @@ import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/ano/conmemo
         OrderByPipe
     ],
     entryComponents: [
-        DialogoDetalleComponent,
+        DialogoDetalleSeriesComponent,
+        DialogoDetalleConmemorativasComponent,
+        ListadoConmemorativasComponent,
+        ListadoSeriesComponent,
         SmdFabSpeedDialComponent,
-        DetalleConmemorativasAnoComponent,
-        DetalleConmemorativasPaisComponent,
         SmdFabSpeedDialTrigger,
         SmdFabSpeedDialActions,
-        ConmemorativasAnoComponent,
-        ConmemorativasPaisComponent
+        FiltroAnoConmemorativasComponent,
+        FiltroPaisConmemorativasComponent,
+        FiltroPaisSeriesComponent
     ],
     providers: [
         {
             provide: LOCALE_ID,
             useValue: "es-ES"
         },
-        LoadConmemorativasPaisResolver,
-        LoadConmemorativasAnosResolver,
-        ConmemorativasPaisService,
-        ConmemorativasAnosService
+        ConmemorativasPaisResolver,
+        ConmemorativasAnosResolver,
+        ConmemorativasService,
+        SeriesResolver,
+        SeriesService
     ]
 })
 

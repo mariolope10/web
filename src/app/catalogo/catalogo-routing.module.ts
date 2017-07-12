@@ -1,4 +1,4 @@
-import {Routes, RouterModule, Resolve, ActivatedRouteSnapshot} from '@angular/router';
+import {Routes, RouterModule, Resolve, ActivatedRouteSnapshot, Router} from '@angular/router';
 
 import {CatalogoComponent} from './catalogo.component';
 
@@ -6,46 +6,75 @@ import {CanActivateAuthGuard} from "app/can-activate.authguard";
 import {Injectable} from "@angular/core";
 
 import {SeriesService} from "app/catalogo/series/series.service";
-import {ConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.component";
-import {ConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.component";
-import {ConmemorativasPaisService} from "app/catalogo/conmemorativas/pais/conmemorativas-pais.service";
-import {DetalleConmemorativasAnoComponent} from "app/catalogo/conmemorativas/ano/detalle/detalle-conmemorativas-ano.component";
-import {DetalleConmemorativasPaisComponent} from "app/catalogo/conmemorativas/pais/detalle/detalle-conmemorativas-pais.component";
-import {ConmemorativasAnosService} from "app/catalogo/conmemorativas/ano/conmemorativas-ano.service";
+import {Moneda} from "app/models/moneda";
+import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
+import {ListadoConmemorativasComponent} from "app/catalogo/conmemorativas/listado/listado-conmemorativas.component";
+import {FiltroPaisSeriesComponent} from "app/catalogo/series/filtro-pais/filtro-pais-series.component";
+import {ListadoSeriesComponent} from "app/catalogo/series/listado/listado-series.component";
+import {FiltroPaisConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
+import {FiltroAnoConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
+import {Serie} from "app/models/serie";
 
 // CARGA DE BASE DE DATOS - SERIES
 @Injectable()
-export class LoadSeriesResolver implements Resolve<any> {
-    constructor(private seriesService: SeriesService) {}
+export class SeriesResolver implements Resolve<Serie[] | boolean> {
+    constructor(private seriesService: SeriesService, private router: Router) {}
 
-    resolve(): Promise<any> {
-        return this.seriesService.getListadoSeries().then(listadoSeries => {
-            return listadoSeries;
-        });
+    resolve(route: ActivatedRouteSnapshot): Promise<Serie[]> | boolean {
+        return this.seriesService.getListadoSeries(route.params.codigo).then(
+            listadoSeries => {
+                if (listadoSeries.length > 0) {
+                    return listadoSeries;
+
+                } else {
+                    // codigo no encontrado
+                    this.router.navigate(['/extra/404']);
+                    return false;
+                }
+            }
+        );
     }
 }
 
 // CARGA DE BASE DE DATOS - CONMEMORATIVAS PAIS
 @Injectable()
-export class LoadConmemorativasPaisResolver implements Resolve<any> {
-    constructor(private conmemorativasPaisService: ConmemorativasPaisService) {}
+export class ConmemorativasPaisResolver implements Resolve<Moneda[] | boolean> {
+    constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<any> {
-        return this.conmemorativasPaisService.getListadoMonedasPaises(route.params.codigo).then(listadoConmemorativasPais => {
-            return listadoConmemorativasPais;
-        });
+    resolve(route: ActivatedRouteSnapshot): Promise<Moneda[]> | boolean {
+        return this.conmemorativasService.getListadoMonedasPaises(route.params.codigo).then(
+            listadoConmemorativasPais => {
+                if (listadoConmemorativasPais.length > 0) {
+                    return listadoConmemorativasPais;
+
+                } else {
+                    // codigo no encontrado
+                    this.router.navigate(['/extra/404']);
+                    return false;
+                }
+            }
+        );
     }
 }
 
 // CARGA DE BASE DE DATOS - CONMEMORATIVAS ANOS
 @Injectable()
-export class LoadConmemorativasAnosResolver implements Resolve<any> {
-    constructor(private conmemorativasAnosService: ConmemorativasAnosService) {}
+export class ConmemorativasAnosResolver implements Resolve<any> {
+    constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot): Promise<any> {
-        return this.conmemorativasAnosService.getListadoMonedasAnos(route.params.ano).then(listadoConmemorativasAnos => {
-            return listadoConmemorativasAnos;
-        });
+        return this.conmemorativasService.getListadoMonedasAnos(route.params.ano).then(
+            listadoConmemorativasAnos => {
+                if (listadoConmemorativasAnos.length > 0) {
+                    return listadoConmemorativasAnos;
+
+                } else {
+                    // ano no encontrado
+                    this.router.navigate(['/extra/404']);
+                    return false;
+                }
+            }
+        );
     }
 }
 
@@ -62,40 +91,45 @@ export const CatalogoRoutes: Routes = [
                     {path: '', redirectTo: '/app/catalogo/conmemorativas/pais', pathMatch: 'full'},
                     {
                         path: 'pais',
-                        component: ConmemorativasPaisComponent,
+                        component: FiltroPaisConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
                     },
                     {
                         path: 'pais/:codigo',
-                        component: DetalleConmemorativasPaisComponent,
+                        component: ListadoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
-                            listadoMonedasPaises: LoadConmemorativasPaisResolver
+                            listadoMonedas: ConmemorativasPaisResolver
                         }
                     },
                     {
                         path: 'ano',
-                        component: ConmemorativasAnoComponent,
+                        component: FiltroAnoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard]
                     },
                     {
                         path: 'ano/:ano',
-                        component: DetalleConmemorativasAnoComponent,
+                        component: ListadoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
-                            listadoMonedasAnos: LoadConmemorativasAnosResolver
+                            listadoMonedas: ConmemorativasAnosResolver
                         }
                     }
                 ]
-            }/*,
+            },
             {
                 path: 'series',
-                component: CatalogoSeriesComponent,
+                component: FiltroPaisSeriesComponent,
+                canActivate: [CanActivateAuthGuard]
+            },
+            {
+                path: 'series/:codigo',
+                component: ListadoSeriesComponent,
                 canActivate: [CanActivateAuthGuard],
                 resolve: {
-                    listadoSeries: LoadSeriesResolver
+                    listadoSeries: SeriesResolver
                 }
-            }*/
+            }
         ]
     }
 ];

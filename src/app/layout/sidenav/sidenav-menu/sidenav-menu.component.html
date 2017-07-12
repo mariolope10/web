@@ -4,7 +4,13 @@
     <li>
         <a md-button href="#/app/catalogo"><i class="nav-icon material-icons">content_paste</i><span class="nav-text">Catálogo de monedas</span></a>
         <ul>
-            <li><a md-button class="md-button prepend-icon" [routerLink]="['/app/catalogo/conmemorativas']"><span>Conmemorativas</span></a></li>
+            <li>
+                <a md-button class="md-button prepend-icon" href="javascript:;"><span>Conmemorativas</span></a>
+                <ul>
+                    <li><a md-button class="md-button" [routerLink]="['/app/catalogo/conmemorativas/pais']"><span>Por pais</span></a></li>
+                    <li><a md-button class="md-button" [routerLink]="['/app/catalogo/conmemorativas/ano']"><span>Por año</span></a></li>
+                 </ul>
+            </li>
             <li><a md-button class="md-button prepend-icon" [routerLink]="['/app/catalogo/series']"><span>Series</span></a></li>
         </ul>
     </li>

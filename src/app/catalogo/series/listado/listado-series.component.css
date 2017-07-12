@@ -7,6 +7,12 @@
     cursor: pointer;
 }
 
+.foto-container p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
 #serie-fotos-container {
     margin-bottom: 1.25rem;
 }

@@ -2,7 +2,7 @@
 <div md-dialog-content class="text-center">
     <div class="easyzoom easyzoom--overlay" style="margin-bottom: 20px">
         <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
-            <img src="{{moneda.imagen}}" alt="Moneda {{moneda.valor.nombre_comun}}"/>
+            <img class="img-zoom" src="{{moneda.imagen}}" alt="Moneda {{moneda.valor.nombre_comun}}"/>
         </a>
     </div>
 
@@ -16,6 +16,10 @@
                 <tr>
                     <td class="mdl-data-table__cell--non-numeric"><strong>Ceca</strong></td>
                     <td class="mdl-data-table__cell--non-numeric">{{moneda.ceca.nombre}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>Autor</strong></td>
+                    <td class="mdl-data-table__cell--non-numeric">{{moneda.autor}}</td>
                 </tr>
             </tbody>
         </table>

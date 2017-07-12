@@ -1,25 +1,29 @@
-import {Component, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
+import {Moneda} from "app/models/moneda";
 
 import * as jQuery from 'jquery';
 import 'easyzoom';
-import {Moneda} from "app/models/moneda";
 
 @Component({
     selector: 'dialogo-detalle',
+    styles: [`
+        .img-zoom {
+            max-width: 250px;
+        }
+    `
+    ],
     templateUrl: './dialogo-detalle-series.component.html'
 })
 export class DialogoDetalleSeriesComponent implements AfterViewInit {
     moneda: Moneda;
-    valor: string;
 
-    easyZoomElement: any;
-
-    constructor(public dialogRef: MdDialogRef<DialogoDetalleSeriesComponent>, private elementRef: ElementRef) {}
+    constructor(public dialogRef: MdDialogRef<DialogoDetalleSeriesComponent>) {}
 
     ngAfterViewInit() {
-        this.easyZoomElement = jQuery(this.elementRef.nativeElement.querySelector('.easyzoom'));
-        this.easyZoomElement.easyZoom({
+        let easyZoomElement: any = jQuery('.easyzoom');
+        
+        easyZoomElement.easyZoom({
             loadingNotice: 'Cargando imagen',
             errorNotice: 'Se ha producido un error al cargar la imagen'
         });

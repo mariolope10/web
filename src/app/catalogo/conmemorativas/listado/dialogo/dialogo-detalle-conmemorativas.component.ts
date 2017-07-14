@@ -11,6 +11,9 @@ import 'easyzoom';
         .img-zoom {
             max-width: 250px;
         }
+        #div-img-zoom {
+            margin-bottom: 20px;
+        }
     `
     ],
     templateUrl: './dialogo-detalle-conmemorativas.component.html'
@@ -21,12 +24,12 @@ export class DialogoDetalleConmemorativasComponent implements AfterViewInit {
     constructor(public dialogRef: MdDialogRef<DialogoDetalleConmemorativasComponent>) {}
 
     ngAfterViewInit() {
-        let easyZoomElement: any = jQuery('.easyzoom');
+        /*let easyZoomElement: any = jQuery('.easyzoom');
         
         easyZoomElement.easyZoom({
             loadingNotice: 'Cargando imagen',
             errorNotice: 'Se ha producido un error al cargar la imagen'
-        });
+        });*/
     }
 
     /*imgen: string;

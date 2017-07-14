@@ -38,10 +38,10 @@ export class SeriesResolver implements Resolve<Serie[] | boolean> {
 
 // CARGA DE BASE DE DATOS - CONMEMORATIVAS PAIS
 @Injectable()
-export class ConmemorativasPaisResolver implements Resolve<Moneda[] | boolean> {
+export class ConmemorativasPaisResolver implements Resolve<Array<{moneda: Moneda, enColeccion: boolean}> | boolean> {
     constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<Moneda[]> | boolean {
+    resolve(route: ActivatedRouteSnapshot): Promise<Array<{moneda: Moneda, enColeccion: boolean}>> | boolean {
         return this.conmemorativasService.getListadoMonedasPaises(route.params.codigo).then(
             listadoConmemorativasPais => {
                 if (listadoConmemorativasPais.length > 0) {

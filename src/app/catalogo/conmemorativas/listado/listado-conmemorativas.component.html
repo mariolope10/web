@@ -1,35 +1,49 @@
 <section class="container-fluid with-maxwidth chapter">
     <article class="article">
-        <h2 class="article-title">Monedas conmemorativas de {{monedas[0].pais.nombre}}</h2>
+        <h2 class="article-title">Monedas conmemorativas de {{resultados[0].moneda.pais.nombre}}</h2>
     </article>
     <table class="tabla-monedas display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Imagen</th>
+                <th>KM#</th>
                 <th>Año</th>
-                <th>Día</th>
                 <th>Tirada</th>
                 <th>Motivo</th>
+                <th class="all"></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>Imagen</th>
+                <th>KM#</th>
                 <th>Año</th>
-                <th>Día</th>
                 <th>Tirada</th>
                 <th>Motivo</th>
+                <th class="all"></th>
             </tr>
         </tfoot>
         <tbody>
-            <tr *ngFor="let moneda of monedas | orderBy : ['fecha_emision']">
-                <td>
-                    <img (click)="openDialogoDetalle(moneda)" src="{{moneda.imagen}}"/>
+            <tr *ngFor="let resultado of resultados">
+                <td [ngClass]="(resultado.enColeccion) ? 'iWishL' : 'iHaveL'">
+                    <img (click)="openDialogoDetalle(resultado.moneda)" src="{{resultado.moneda.imagen}}"/>
                 </td>
-                <td><strong>{{moneda.fecha_emision | date: 'yyyy'}}</strong></td>
-                <td>{{moneda.fecha_emision | date: 'dd MMMM'}}</td>
-                <td>{{moneda.tirada_unc + moneda.tirada_bu + moneda.tirada_proof}}</td>
-                <td>{{moneda.motivo}}</td>
+                <td>{{resultado.moneda.km}}</td>
+                <td><strong>{{resultado.moneda.fecha_emision | date: 'yyyy'}}, {{resultado.moneda.fecha_emision | date: 'dd MMMM'}}</strong></td>
+                <td>{{resultado.moneda.tirada_unc + resultado.moneda.tirada_bu + resultado.moneda.tirada_proof}}</td>
+                <td>{{resultado.moneda.motivo}}</td>
+                <td [ngClass]="(resultado.enColeccion) ? 'iWishR' : 'iHaveR'">
+                    <div class="row">
+                        <div class="col">
+                            <button (click)="openDialogoDetalle(resultado.moneda)" md-raised-button color="primary" class="btn-sm btn-block"><md-icon class="material-icons">visibility</md-icon> VER DETALLES</button><div class="divider divider-sm"></div>
+                        </div>
+                        <div class="col">
+                            <div *ngIf="resultado.enColeccion; then add else edit"></div>
+                            <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda.id)" md-raised-button color="warn" class="btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR A CATALOGO</button></ng-template>
+                            <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda.id)" md-raised-button color="accent" class="btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR CATALOGO</button></ng-template>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

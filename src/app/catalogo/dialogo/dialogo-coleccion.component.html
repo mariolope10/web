@@ -1,0 +1,57 @@
+<h1 md-dialog-title>Mi catálogo</h1>
+<div *ngIf="isDataAvailable" md-dialog-content>
+    <div class="row">
+        <div class="col">CIRC</div>
+        <div class="col">UNC</div>
+        <div class="col">BU</div>
+        <div class="col">PROOF</div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.circ_coleccion}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.sc_coleccion}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.bu_coleccion}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.proof_coleccion}}">
+            </md-input-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.circ_intercambio}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.sc_intercambio}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.bu_intercambio}}">
+            </md-input-container>
+        </div>
+        <div class="col">
+            <md-input-container>
+                <input mdInput min="0" type="number" value="{{totalesMoneda.proof_intercambio}}">
+            </md-input-container>
+        </div>
+    </div>
+</div>
+<div md-dialog-actions>
+    <button md-button (click)="dialogRef.close()">CERRAR</button>
+    <button md-raised-button color="accent" (click)="dialogRef.close()">GUARDAR</button>
+</div>

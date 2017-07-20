@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 import {Moneda} from "app/models/moneda";
 
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MdDialog} from "@angular/material";
 
 import * as jQuery from 'jquery';
@@ -9,70 +9,43 @@ import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-responsive';
 import 'datatables.net-fixedcolumns';
-import 'easyzoom';
+
 import {DialogoDetalleConmemorativasComponent} from "app/catalogo/conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
 import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.component";
+import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
+import {LayoutService} from "app/layout/layout.service";
 
 @Component({
     selector: 'listado-conmemorativas',
-    styles: [`
-        img {
-            max-width: 145px;
-            min-width: 75px;
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
-        h2.article-title {
-            padding-top: 30px;
-        }
-        table.dataTable td {
-            white-space: nowrap;
-        }
-        .detalle-coleccion td, .detalle-coleccion th{
-            box-sizing: border-box;
-        }
-        .iWishL {
-            border-left: 10px solid #EF5350;
-        }
-        .iHaveL {
-            border-left: 10px solid #66BB6A;
-        }
-        .iWishR {
-            border-right: 10px solid #EF5350;
-        }
-        .iHaveR {
-            border-right: 10px solid #66BB6A;
-        }
-        table.dataTable tfoot th {
-            border-top: 1px solid #dddddd;
-        }
-        table.dataTable thead th {
-            border-bottom: 1px solid #dddddd;
-        }
-        table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-            background-color: black;
-        }
-        table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-            background-color: #EF5350;
-        }
-        .material-icons {
-            font-size: 21px;
-        }
-    `
-    ],
+    styleUrls: ['./listado-conmemorativas.component.css'],
     templateUrl: './listado-conmemorativas.component.html',
 })
+
 export class ListadoConmemorativasComponent implements OnInit {
     resultados: Array<{moneda: Moneda, enColeccion: boolean}>;
+    type: string;
 
-    constructor(public dialog: MdDialog, private route: ActivatedRoute) {}
-    
+    tableWidget: any;
+
+    constructor(private router: Router, private zone: NgZone, private layoutService: LayoutService, private conmemorativasService: ConmemorativasService, public dialog: MdDialog, private route: ActivatedRoute) {}
+
     ngAfterViewInit() {
+        this.initDatatable();
+    }
+
+    ngOnInit(): void {
+        this.route.data
+            .subscribe((data: {listadoMonedas: Array<{moneda: Moneda, enColeccion: boolean}>, type: string}) => {
+                this.resultados = data.listadoMonedas;
+                this.type = data.type;
+            });
+    }
+
+    initDatatable(): void {
         // DATATABLES
-        let tabla: any = jQuery('table');
-        
-        tabla.DataTable({
+        let table: any = jQuery('table');
+
+        this.tableWidget = table.DataTable({
             autoWidth: false,
             paging: false,
             info: false,
@@ -93,26 +66,82 @@ export class ListadoConmemorativasComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {
-        this.route.data
-            .subscribe((data: {listadoMonedas: Array<{moneda: Moneda, enColeccion: boolean}>}) => {
-                this.resultados = data.listadoMonedas;
-            });
+    reInitDatatable(): void {
+        this.tableWidget.destroy();
+        this.tableWidget = null;
+
+        setTimeout(() => this.initDatatable(), 0);
     }
-    
+
     openDialogoDetalle(moneda: Moneda) {
+        // DIALOGO DE DETALLES DE LA MONEDA
         let dialogRef = this.dialog.open(DialogoDetalleConmemorativasComponent);
         let instance = dialogRef.componentInstance;
         instance.moneda = moneda;
     }
-    
+
     openDialogoColeccion(moneda: Moneda) {
-        let dialogRef = this.dialog.open(DialogoColeccionComponent);
-        let instance = dialogRef.componentInstance;
+        // DIALOGO DE DETALLES DE LA COLECCION DEL USUARIO
+        let dialog = this.dialog.open(DialogoColeccionComponent);
+        let instance = dialog.componentInstance;
         instance.moneda = moneda;
-        
-        dialogRef.afterClosed().subscribe((result) => {
-            location.reload();
+
+        // REFRESCAMOS AL CERRAR EL DIALOGO
+        dialog.afterClosed().subscribe(result => {
+            switch (this.type) {
+                case 'type_pais': {
+                    this.getListadoMonedasConmemorativasByPais(moneda.pais.codigo);
+                    break;
+                }
+                case 'type_ano': {
+                    this.getListadoMonedasConmemorativasByAno(moneda.ano)
+                    break;
+                }
+            }
         });
+    }
+
+    getListadoMonedasConmemorativasByPais(codigo: string): void {
+        this.layoutService.updatePreloaderState('active');
+
+        this.conmemorativasService.getListadoMonedasPaises(codigo).then(
+            listadoConmemorativasPais => {
+                this.layoutService.updatePreloaderState('hide');
+
+                if (listadoConmemorativasPais.length > 0) {
+                    this.zone.run(() => {
+                        this.resultados = listadoConmemorativasPais;
+
+                        this.reInitDatatable();
+                    });
+
+                } else {
+                    // codigo no encontrado
+                    this.router.navigate(['/extra/404']);
+                }
+            }
+        );
+    }
+
+    getListadoMonedasConmemorativasByAno(ano: number): void {
+        this.layoutService.updatePreloaderState('active');
+
+        this.conmemorativasService.getListadoMonedasAnos(ano).then(
+            listadoConmemorativasAno => {
+                this.layoutService.updatePreloaderState('hide');
+
+                if (listadoConmemorativasAno.length > 0) {
+                    this.zone.run(() => {
+                        this.resultados = listadoConmemorativasAno;
+                        
+                        this.reInitDatatable();
+                    });
+
+                } else {
+                    // ano no encontrado
+                    this.router.navigate(['/extra/404']);
+                }
+            }
+        );
     }
 }

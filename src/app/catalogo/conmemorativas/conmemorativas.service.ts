@@ -20,7 +20,7 @@ export class ConmemorativasService {
             .toPromise();
     }
     
-    getListadoMonedasAnos(ano: number): Promise<Moneda[]> {
+    getListadoMonedasAnos(ano: number): Promise<Array<{moneda: Moneda, enColeccion: boolean}>> {
         const url = environment.apiEndpoint + "moneda/conmemorativa/ano/" + ano;
 
         return this.jwtHttp

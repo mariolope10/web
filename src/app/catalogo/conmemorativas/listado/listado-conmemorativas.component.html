@@ -25,22 +25,22 @@
         </tfoot>
         <tbody>
             <tr *ngFor="let resultado of resultados">
-                <td [ngClass]="(resultado.enColeccion) ? 'iWishL' : 'iHaveL'">
+                <td [ngClass]="(resultado.enColeccion) ? 'iHaveL' : 'iWishL'">
                     <img (click)="openDialogoDetalle(resultado.moneda)" src="{{resultado.moneda.imagen}}"/>
                 </td>
                 <td>{{resultado.moneda.km}}</td>
                 <td><strong>{{resultado.moneda.fecha_emision | date: 'yyyy'}}, {{resultado.moneda.fecha_emision | date: 'dd MMMM'}}</strong></td>
                 <td>{{resultado.moneda.tirada_unc + resultado.moneda.tirada_bu + resultado.moneda.tirada_proof}}</td>
                 <td>{{resultado.moneda.motivo}}</td>
-                <td [ngClass]="(resultado.enColeccion) ? 'iWishR' : 'iHaveR'">
+                <td [ngClass]="(resultado.enColeccion) ? 'iHaveR' : 'iWishR'">
                     <div class="row">
                         <div class="col">
                             <button (click)="openDialogoDetalle(resultado.moneda)" md-raised-button color="primary" class="btn-sm btn-block"><md-icon class="material-icons">visibility</md-icon> VER DETALLES</button><div class="divider divider-sm"></div>
                         </div>
                         <div class="col">
                             <div *ngIf="resultado.enColeccion; then edit else add"></div>
-                            <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="warn" class="btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR A CATALOGO</button></ng-template>
-                            <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="accent" class="btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR CATALOGO</button></ng-template>
+                            <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="warn" class="btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR</button></ng-template>
+                            <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="accent" class="btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR</button></ng-template>
                         </div>
                     </div>
                 </td>

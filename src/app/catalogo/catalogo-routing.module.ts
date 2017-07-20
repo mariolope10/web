@@ -100,7 +100,8 @@ export const CatalogoRoutes: Routes = [
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
                             listadoMonedas: ConmemorativasPaisResolver
-                        }
+                        },
+                        data: {type: 'type_pais'}
                     },
                     {
                         path: 'ano',
@@ -113,7 +114,8 @@ export const CatalogoRoutes: Routes = [
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
                             listadoMonedas: ConmemorativasAnosResolver
-                        }
+                        },
+                        data: {type: 'type_ano'}
                     }
                 ]
             },

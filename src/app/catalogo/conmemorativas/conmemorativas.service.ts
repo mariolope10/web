@@ -37,4 +37,22 @@ export class ConmemorativasService {
             .map(response => response.json())
             .toPromise();
     }
+    
+    addUserMoneda(userMoneda: UserMoneda): Promise<UserMoneda> {
+        const url = environment.apiEndpoint + "user/monedas/";
+
+        return this.jwtHttp
+            .post(url, userMoneda)
+            .map(response => response.json())
+            .toPromise();
+    }
+    
+    updateUserMoneda(userMoneda: UserMoneda): Promise<UserMoneda> {
+        const url = environment.apiEndpoint + "user/monedas/";
+
+        return this.jwtHttp
+            .put(url, userMoneda)
+            .map(response => response.json())
+            .toPromise();
+    }
 }

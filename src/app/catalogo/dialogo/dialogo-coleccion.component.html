@@ -1,57 +1,61 @@
 <h1 md-dialog-title>Mi catálogo</h1>
 <div *ngIf="isDataAvailable" md-dialog-content>
     <div class="row">
-        <div class="col">CIRC</div>
-        <div class="col">UNC</div>
-        <div class="col">BU</div>
-        <div class="col">PROOF</div>
+        <div class="col-12 col-sm-4 col-descripcion"><strong>EN COLECCION</strong></div>
+        <div class="col-3 col-sm-2">
+            <p>Cir</p>
+            <md-input-container>
+                <input mdInput min="0" type="number" [(ngModel)]="userMoneda.circ_coleccion">
+            </md-input-container>
+        </div>
+        <div class="col-3 col-sm-2">
+            <p>Unc</p>
+            <md-input-container>
+                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.sc_coleccion">
+            </md-input-container>
+        </div>
+        <div class="col-3 col-sm-2">
+            <p>Bu</p>
+            <md-input-container>
+                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.bu_coleccion">
+            </md-input-container>
+        </div>
+        <div class="col-3 col-sm-2">
+            <p>Proof</p>
+            <md-input-container>
+                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.proof_coleccion">
+            </md-input-container>
+        </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col-12 col-sm-4 col-descripcion"><strong>INTERCAMBIO</strong></div>
+        <div class="col-3 col-sm-2">
+            <p>Cir</p>
             <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.circ_coleccion}}">
+                <input mdInput min="0" type="number" [(ngModel)]="userMoneda.circ_intercambio">
             </md-input-container>
         </div>
-        <div class="col">
+        <div class="col-3 col-sm-2">
+            <p>Unc</p>
             <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.sc_coleccion}}">
+                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.sc_intercambio">
             </md-input-container>
         </div>
-        <div class="col">
+        <div class="col-3 col-sm-2">
+            <p>Bu</p>
             <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.bu_coleccion}}">
+                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.bu_intercambio">
             </md-input-container>
         </div>
-        <div class="col">
+        <div class="col-3 col-sm-2">
+            <p>Proof</p>
             <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.proof_coleccion}}">
-            </md-input-container>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.circ_intercambio}}">
-            </md-input-container>
-        </div>
-        <div class="col">
-            <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.sc_intercambio}}">
-            </md-input-container>
-        </div>
-        <div class="col">
-            <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.bu_intercambio}}">
-            </md-input-container>
-        </div>
-        <div class="col">
-            <md-input-container>
-                <input mdInput min="0" type="number" value="{{totalesMoneda.proof_intercambio}}">
+                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.proof_intercambio">
             </md-input-container>
         </div>
     </div>
 </div>
 <div md-dialog-actions>
+    <button [disabled]="disabled" md-raised-button color="accent" (click)="saveUserMoneda(userMoneda)">GUARDAR</button>
     <button md-button (click)="dialogRef.close()">CERRAR</button>
-    <button md-raised-button color="accent" (click)="dialogRef.close()">GUARDAR</button>
 </div>

@@ -17,7 +17,9 @@ import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.
     selector: 'listado-conmemorativas',
     styles: [`
         img {
-            width: 145px;
+            max-width: 145px;
+            min-width: 75px;
+            width: 100%;
             height: auto;
             cursor: pointer;
         }
@@ -41,6 +43,21 @@ import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.
         }
         .iHaveR {
             border-right: 10px solid #66BB6A;
+        }
+        table.dataTable tfoot th {
+            border-top: 1px solid #dddddd;
+        }
+        table.dataTable thead th {
+            border-bottom: 1px solid #dddddd;
+        }
+        table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+            background-color: black;
+        }
+        table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+            background-color: #EF5350;
+        }
+        .material-icons {
+            font-size: 21px;
         }
     `
     ],
@@ -89,9 +106,13 @@ export class ListadoConmemorativasComponent implements OnInit {
         instance.moneda = moneda;
     }
     
-    openDialogoColeccion(id: number) {
+    openDialogoColeccion(moneda: Moneda) {
         let dialogRef = this.dialog.open(DialogoColeccionComponent);
         let instance = dialogRef.componentInstance;
-        instance.id = id;
+        instance.moneda = moneda;
+        
+        dialogRef.afterClosed().subscribe((result) => {
+            location.reload();
+        });
     }
 }

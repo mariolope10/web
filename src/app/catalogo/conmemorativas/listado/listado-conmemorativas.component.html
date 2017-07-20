@@ -5,7 +5,7 @@
     <table class="tabla-monedas display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Imagen</th>
+                <th class="all">Imagen</th>
                 <th>KM#</th>
                 <th>Año</th>
                 <th>Tirada</th>
@@ -15,7 +15,7 @@
         </thead>
         <tfoot>
             <tr>
-                <th>Imagen</th>
+                <th class="all">Imagen</th>
                 <th>KM#</th>
                 <th>Año</th>
                 <th>Tirada</th>
@@ -38,9 +38,9 @@
                             <button (click)="openDialogoDetalle(resultado.moneda)" md-raised-button color="primary" class="btn-sm btn-block"><md-icon class="material-icons">visibility</md-icon> VER DETALLES</button><div class="divider divider-sm"></div>
                         </div>
                         <div class="col">
-                            <div *ngIf="resultado.enColeccion; then add else edit"></div>
-                            <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda.id)" md-raised-button color="warn" class="btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR A CATALOGO</button></ng-template>
-                            <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda.id)" md-raised-button color="accent" class="btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR CATALOGO</button></ng-template>
+                            <div *ngIf="resultado.enColeccion; then edit else add"></div>
+                            <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="warn" class="btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR A CATALOGO</button></ng-template>
+                            <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="accent" class="btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR CATALOGO</button></ng-template>
                         </div>
                     </div>
                 </td>

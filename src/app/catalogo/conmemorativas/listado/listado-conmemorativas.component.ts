@@ -51,18 +51,78 @@ export class ListadoConmemorativasComponent implements OnInit {
             info: false,
             searching: false,
             responsive: true,
+            processing: true,
+            serverSide: false,
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
+            ajax: {
+                url: "http://localhost:9966/api/moneda/conmemorativa/pais/es",
+                type: 'POST',
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
+                }
+            },
             order: [[2, 'desc']],
             columns: [
-                {orderable: false, width: "15%"},
-                {orderable: true, width: "5%"},
-                {orderable: true, width: "15%"},
-                {orderable: true, width: "10%"},
-                {orderable: false, width: "40%"},
-                {orderable: false, width: "15%"}
-            ]
+                {data: "moneda.tirada_bu", orderable: false, width: "15%"},
+                {data: "moneda.tirada_bu", orderable: true, width: "5%"},
+                {data: "moneda.tirada_bu", orderable: true, width: "15%"},
+                {data: "moneda.tirada_bu", orderable: true, width: "10%"},
+                {data: "moneda.tirada_bu", orderable: false, width: "40%"},
+                {data: "moneda.tirada_bu", orderable: false, width: "15%"}
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    orderable: false,
+                    width: "15%",
+                    render: function (data, type, row) {
+                        return '<img (click)="openDialogoDetalle(' + row.moneda + ')" src="' + row.moneda.imagen + '" />';
+                    }
+                },
+                {
+                    targets: [1],
+                    orderable: true,
+                    width: "5%"
+                },
+                {
+                    targets: [2],
+                    orderable: true,
+                    width: "15%"
+                },
+                {
+                    targets: [3],
+                    orderable: true,
+                    width: "10%"
+                },
+                {
+                    targets: [4],
+                    orderable: false,
+                    width: "40%"
+                },
+                {
+                    targets: [5],
+                    orderable: false,
+                    width: "15%"
+                },
+                /*{
+                    targets: [4],
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        if (row.area_categoria_count === 0) {
+                            return '<div class="btn-group" role="group" aria-label="..."><button type="button" title="Editar" class="btn_editar btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></button><button type="button" title="Eliminar" class="btn_eliminar btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></button></div>';
+
+                        } else {
+                            return '<div class="btn-group" role="group" aria-label="..."><button type="button" title="Editar" class="btn_editar btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></button><button type="button" disabled title="Eliminar" class="btn_eliminar btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></button></div>';
+                        }
+                    }
+                }*/
+            ],
+            initComplete: function (settings, json) {
+                
+            }
         });
     }
 
@@ -133,7 +193,7 @@ export class ListadoConmemorativasComponent implements OnInit {
                 if (listadoConmemorativasAno.length > 0) {
                     this.zone.run(() => {
                         this.resultados = listadoConmemorativasAno;
-                        
+
                         this.reInitDatatable();
                     });
 

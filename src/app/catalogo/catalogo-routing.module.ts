@@ -98,9 +98,9 @@ export const CatalogoRoutes: Routes = [
                         path: 'pais/:codigo',
                         component: ListadoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
-                        resolve: {
+                        /*resolve: {
                             listadoMonedas: ConmemorativasPaisResolver
-                        },
+                        },*/
                         data: {type: 'type_pais'}
                     },
                     {

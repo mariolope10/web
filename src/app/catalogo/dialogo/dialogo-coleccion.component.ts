@@ -52,7 +52,7 @@ export class DialogoColeccionComponent implements AfterViewInit {
             this.conmemorativasService.updateUserMoneda(this.userMoneda).then(
                 userMoneda => {
                     this.disabled = false
-                    this.dialogRef.close()
+                    this.dialogRef.close("save")
                     this.openSnackBar("Guardado correctamente")
                 },
                 (error: any) => {
@@ -67,7 +67,7 @@ export class DialogoColeccionComponent implements AfterViewInit {
             this.conmemorativasService.addUserMoneda(this.userMoneda).then(
                 userMoneda => {
                     this.disabled = false
-                    this.dialogRef.close()
+                    this.dialogRef.close("save")
                     this.openSnackBar("Guardado correctamente")
                 },
                 (error: any) => {

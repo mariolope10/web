@@ -1,36 +1,36 @@
 <section class="container-fluid with-maxwidth chapter">
     <article class="article">
-        <h2 class="article-title">Monedas conmemorativas de <!--{{resultados[0].moneda.pais.nombre}}--></h2>
+        <h2 class="article-title">Monedas conmemorativas de {{header}}</h2>
     </article>
-    <table class="tabla-monedas display" cellspacing="0" width="100%">
+    <table class="tabla-monedas mdl-data-table" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="all">Imagen</th>
+                <th class="all border-left-header">Imagen</th>
                 <th>KM#</th>
                 <th>Fecha</th>
                 <th>Tirada</th>
                 <th>Motivo</th>
-                <th class="all"></th>
+                <th class="all border-right-header"></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th class="all">Imagen</th>
+                <th class="all border-left-footer">Imagen</th>
                 <th>KM#</th>
                 <th>Fecha</th>
                 <th>Tirada</th>
                 <th>Motivo</th>
-                <th class="all"></th>
+                <th class="all border-right-footer"></th>
             </tr>
         </tfoot>
-        <!--<tbody>
+        <tbody>
             <tr *ngFor="let resultado of resultados">
                 <td [ngClass]="(resultado.enColeccion) ? 'iHaveL' : 'iWishL'">
                     <img (click)="openDialogoDetalle(resultado.moneda)" src="{{resultado.moneda.imagen}}"/>
                 </td>
                 <td>{{resultado.moneda.km}}</td>
                 <td><strong>{{resultado.moneda.fecha_emision | date: 'yyyy'}}, {{resultado.moneda.fecha_emision | date: 'dd MMMM'}}</strong></td>
-                <td>{{resultado.moneda.tirada_unc + resultado.moneda.tirada_bu + resultado.moneda.tirada_proof}}</td>
+                <td>{{resultado.moneda.tirada_unc + resultado.moneda.tirada_bu + resultado.moneda.tirada_proof | number}}</td>
                 <td>{{resultado.moneda.motivo}}</td>
                 <td [ngClass]="(resultado.enColeccion) ? 'iHaveR' : 'iWishR'">
                     <div class="row">
@@ -45,6 +45,6 @@
                     </div>
                 </td>
             </tr>
-        </tbody>-->
+        </tbody>
     </table>
 </section>

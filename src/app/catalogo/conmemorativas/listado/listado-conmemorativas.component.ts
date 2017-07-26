@@ -24,6 +24,8 @@ import {LayoutService} from "app/layout/layout.service";
 export class ListadoConmemorativasComponent implements OnInit {
     resultados: Array<{moneda: Moneda, enColeccion: boolean}>;
     type: string;
+    
+    header: any;
 
     tableWidget: any;
 
@@ -39,6 +41,18 @@ export class ListadoConmemorativasComponent implements OnInit {
                 this.resultados = data.listadoMonedas;
                 this.type = data.type;
             });
+            
+        this.initCabecera();
+    }
+    
+    initCabecera(): void {
+        // CABECERA
+        if (this.type === "type_pais") {
+            this.header = this.resultados[0].moneda.pais.nombre;
+            
+        } else {
+            this.header = this.resultados[0].moneda.ano;
+        }
     }
 
     initDatatable(): void {
@@ -50,79 +64,34 @@ export class ListadoConmemorativasComponent implements OnInit {
             paging: false,
             info: false,
             searching: false,
-            responsive: true,
-            processing: true,
-            serverSide: false,
+            responsive: {
+                details: {
+                    renderer: function (api, rowIdx, columns) {
+                        var data = $.map(columns, function (col, i) {
+                            return col.hidden ?
+                                '<div data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                                '<div class="text-left"><strong>' + col.title + '</strong></div> ' +
+                                '<div>' + col.data + '</div>' +
+                                '</div>' :
+                                '';
+                        }).join('');
+
+                        return data ? data : false;
+                    }
+                }
+            },
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             },
-            ajax: {
-                url: "http://localhost:9966/api/moneda/conmemorativa/pais/es",
-                type: 'POST',
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('token'));
-                }
-            },
             order: [[2, 'desc']],
             columns: [
-                {data: "moneda.tirada_bu", orderable: false, width: "15%"},
-                {data: "moneda.tirada_bu", orderable: true, width: "5%"},
-                {data: "moneda.tirada_bu", orderable: true, width: "15%"},
-                {data: "moneda.tirada_bu", orderable: true, width: "10%"},
-                {data: "moneda.tirada_bu", orderable: false, width: "40%"},
-                {data: "moneda.tirada_bu", orderable: false, width: "15%"}
-            ],
-            columnDefs: [
-                {
-                    targets: [0],
-                    orderable: false,
-                    width: "15%",
-                    render: function (data, type, row) {
-                        return '<img (click)="openDialogoDetalle(' + row.moneda + ')" src="' + row.moneda.imagen + '" />';
-                    }
-                },
-                {
-                    targets: [1],
-                    orderable: true,
-                    width: "5%"
-                },
-                {
-                    targets: [2],
-                    orderable: true,
-                    width: "15%"
-                },
-                {
-                    targets: [3],
-                    orderable: true,
-                    width: "10%"
-                },
-                {
-                    targets: [4],
-                    orderable: false,
-                    width: "40%"
-                },
-                {
-                    targets: [5],
-                    orderable: false,
-                    width: "15%"
-                },
-                /*{
-                    targets: [4],
-                    orderable: false,
-                    searchable: false,
-                    render: function (data, type, row) {
-                        if (row.area_categoria_count === 0) {
-                            return '<div class="btn-group" role="group" aria-label="..."><button type="button" title="Editar" class="btn_editar btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></button><button type="button" title="Eliminar" class="btn_eliminar btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></button></div>';
-
-                        } else {
-                            return '<div class="btn-group" role="group" aria-label="..."><button type="button" title="Editar" class="btn_editar btn btn-sm btn-primary"><span class="glyphicon glyphicon-pencil"></span></button><button type="button" disabled title="Eliminar" class="btn_eliminar btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></button></div>';
-                        }
-                    }
-                }*/
-            ],
-            initComplete: function (settings, json) {
-                
-            }
+                {orderable: false, width: "15%"},
+                {orderable: true, width: "5%"},
+                {orderable: true, width: "15%"},
+                {orderable: true, width: "10%"},
+                {orderable: false, width: "40%"},
+                {orderable: false, width: "15%"}
+            ]
         });
     }
 
@@ -147,15 +116,17 @@ export class ListadoConmemorativasComponent implements OnInit {
         instance.moneda = moneda;
 
         // REFRESCAMOS AL CERRAR EL DIALOGO
-        dialog.afterClosed().subscribe(result => {
-            switch (this.type) {
-                case 'type_pais': {
-                    this.getListadoMonedasConmemorativasByPais(moneda.pais.codigo);
-                    break;
-                }
-                case 'type_ano': {
-                    this.getListadoMonedasConmemorativasByAno(moneda.ano)
-                    break;
+        dialog.afterClosed().subscribe((event: string) => {
+            if (event === "save") {
+                switch (this.type) {
+                    case 'type_pais': {
+                        this.getListadoMonedasConmemorativasByPais(moneda.pais.codigo);
+                        break;
+                    }
+                    case 'type_ano': {
+                        this.getListadoMonedasConmemorativasByAno(moneda.ano)
+                        break;
+                    }
                 }
             }
         });
@@ -193,7 +164,7 @@ export class ListadoConmemorativasComponent implements OnInit {
                 if (listadoConmemorativasAno.length > 0) {
                     this.zone.run(() => {
                         this.resultados = listadoConmemorativasAno;
-
+                        
                         this.reInitDatatable();
                     });
 

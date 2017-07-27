@@ -1,4 +1,4 @@
-import {Component, AfterViewInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MdDialogRef, MdSnackBar} from "@angular/material";
 
 import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
@@ -6,7 +6,7 @@ import {UserMoneda} from "app/models/user-moneda";
 import {Moneda} from "app/models/moneda";
 
 @Component({
-    selector: 'dialogo-detalle',
+    selector: 'dialogo-coleccion',
     styles: [`
         .col-descripcion {
             white-space: nowrap;
@@ -15,67 +15,19 @@ import {Moneda} from "app/models/moneda";
     ],
     templateUrl: './dialogo-coleccion.component.html'
 })
-export class DialogoColeccionComponent implements AfterViewInit {
+export class DialogoColeccionComponent {
     moneda: Moneda;
-
-    isDataAvailable: boolean = false;
-
-    userMoneda: UserMoneda;
+    user_moneda: UserMoneda;
 
     disabled: boolean;
 
     constructor(public snackBar: MdSnackBar, private conmemorativasService: ConmemorativasService, public dialogRef: MdDialogRef<DialogoColeccionComponent>) {}
 
-    ngAfterViewInit() {}
-
     ngOnInit() {
-        this.conmemorativasService.getTotalesMonedaEnCatalogoByUser(this.moneda.id).then(
-            userMoneda => {
-                this.userMoneda = userMoneda
-                this.isDataAvailable = true
-            },
-            /*(error: any) => {
-                // NO POSEE EL USUARIO LA MONEDA
-                if (error.status == 404) {
-                    this.totalesMoneda = null
-                    this.isDataAvailable = true
-                }
-            }*/
-        )
-    }
+        this.user_moneda = this.moneda.user_monedas[0];
 
-    saveUserMoneda(userMoneda) {
-        this.disabled = true
-        
-        if (userMoneda.id) {
-            // UPDATE
-            this.conmemorativasService.updateUserMoneda(this.userMoneda).then(
-                userMoneda => {
-                    this.disabled = false
-                    this.dialogRef.close("save")
-                    this.openSnackBar("Guardado correctamente")
-                },
-                (error: any) => {
-                    this.disabled = false
-                    console.log(error)
-                    this.openSnackBar("Se ha producido un error")
-                }
-            )
-
-        } else {
-            // INSERT
-            this.conmemorativasService.addUserMoneda(this.userMoneda).then(
-                userMoneda => {
-                    this.disabled = false
-                    this.dialogRef.close("save")
-                    this.openSnackBar("Guardado correctamente")
-                },
-                (error: any) => {
-                    this.disabled = false
-                    console.log(error)
-                    this.openSnackBar("Se ha producido un error")
-                }
-            )
+        if (this.user_moneda == null) {
+            this.user_moneda = new UserMoneda(this.moneda.id);
         }
     }
 
@@ -83,5 +35,79 @@ export class DialogoColeccionComponent implements AfterViewInit {
         this.snackBar.open(message, "CERRAR", {
             duration: 2000
         });
+    }
+
+    addUserMoneda(user_moneda: UserMoneda) {
+        this.disabled = true
+
+        if (!user_moneda.id) {
+            this.conmemorativasService.addUserMoneda(user_moneda).then(
+                () => {
+                    this.disabled = false
+                    this.dialogRef.close("save")
+                    this.openSnackBar("Guardado correctamente")
+                },
+                () => {
+                    this.disabled = false
+                    //console.log(error)
+                    this.openSnackBar("Se ha producido un error")
+                }
+            )
+        }
+    }
+
+    updateUserMoneda(user_moneda: UserMoneda) {
+        if (this.checkMustDelete(user_moneda)) {
+            // VACIO - BORRAMOS
+            this.deleteUserMoneda(user_moneda.id)
+            return;
+        }
+
+        this.disabled = true
+
+        if (user_moneda.id) {
+            this.conmemorativasService.updateUserMoneda(user_moneda).then(
+                () => {
+                    this.disabled = false
+                    this.dialogRef.close("save")
+                    this.openSnackBar("Guardado correctamente")
+                },
+                () => {
+                    this.disabled = false
+                    this.openSnackBar("Se ha producido un error")
+                }
+            )
+        }
+    }
+
+    deleteUserMoneda(id: number) {
+        this.disabled = true
+
+        this.conmemorativasService.deleteUserMoneda(id).then(
+            () => {
+                this.disabled = false
+                this.dialogRef.close("save")
+                this.openSnackBar("Guardado correctamente")
+            },
+            () => {
+                this.disabled = false
+                this.openSnackBar("Se ha producido un error")
+            }
+        )
+    }
+
+    checkMustDelete(userMoneda: UserMoneda): boolean {
+        if (!userMoneda.circ_coleccion && !userMoneda.circ_intercambio
+            && !userMoneda.sc_coleccion && !userMoneda.sc_intercambio
+            && !userMoneda.bu_coleccion && !userMoneda.bu_intercambio
+            && !userMoneda.proof_coleccion && !userMoneda.proof_intercambio) {
+
+            // DEBE BORRAR
+            return true;
+
+        } else {
+            // NO DEBE BORRAR
+            return false;
+        }
     }
 }

@@ -1,29 +1,29 @@
 <h1 md-dialog-title>Mi catálogo</h1>
-<div *ngIf="isDataAvailable" md-dialog-content>
+<div md-dialog-content>
     <div class="row">
         <div class="col-12 col-sm-4 col-descripcion"><strong>EN COLECCION</strong></div>
         <div class="col-3 col-sm-2">
             <p>Cir</p>
             <md-input-container>
-                <input mdInput min="0" type="number" [(ngModel)]="userMoneda.circ_coleccion">
+                <input mdInput min="0" type="number" [(ngModel)]="user_moneda.circ_coleccion">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Unc</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.sc_coleccion">
+                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.sc_coleccion">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Bu</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.bu_coleccion">
+                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.bu_coleccion">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Proof</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.proof_coleccion">
+                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.proof_coleccion">
             </md-input-container>
         </div>
     </div>
@@ -32,30 +32,33 @@
         <div class="col-3 col-sm-2">
             <p>Cir</p>
             <md-input-container>
-                <input mdInput min="0" type="number" [(ngModel)]="userMoneda.circ_intercambio">
+                <input mdInput min="0" type="number" [(ngModel)]="user_moneda.circ_intercambio">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Unc</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.sc_intercambio">
+                <input [disabled]="moneda.tirada_unc == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.sc_intercambio">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Bu</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.bu_intercambio">
+                <input [disabled]="moneda.tirada_bu == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.bu_intercambio">
             </md-input-container>
         </div>
         <div class="col-3 col-sm-2">
             <p>Proof</p>
             <md-input-container>
-                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="userMoneda.proof_intercambio">
+                <input [disabled]="moneda.tirada_proof == 0" mdInput min="0" type="number" [(ngModel)]="user_moneda.proof_intercambio">
             </md-input-container>
         </div>
     </div>
 </div>
 <div md-dialog-actions>
-    <button [disabled]="disabled" md-raised-button color="accent" (click)="saveUserMoneda(userMoneda)">GUARDAR</button>
+    <div *ngIf="user_moneda.id; then update else add"></div>
+    <ng-template #update><button [disabled]="disabled" md-raised-button color="accent" (click)="updateUserMoneda(user_moneda)">ACTUALIZAR</button></ng-template>
+    <ng-template #add><button [disabled]="disabled" md-raised-button color="accent" (click)="addUserMoneda(user_moneda)">AÑADIR</button></ng-template>
+
     <button md-button (click)="dialogRef.close()">CERRAR</button>
 </div>

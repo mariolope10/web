@@ -5,41 +5,41 @@
     <table class="tabla-monedas mdl-data-table" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th class="all border-left-header">Imagen</th>
+                <th class="mdl-data-table__cell--non-numeric all border-left-header">Imagen</th>
                 <th>KM#</th>
-                <th>Fecha</th>
+                <th class="mdl-data-table__cell--non-numeric">Fecha</th>
                 <th>Tirada</th>
-                <th>Motivo</th>
+                <th class="mdl-data-table__cell--non-numeric">Motivo</th>
                 <th class="all border-right-header"></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th class="all border-left-footer">Imagen</th>
+                <th class="mdl-data-table__cell--non-numeric all border-left-footer">Imagen</th>
                 <th>KM#</th>
-                <th>Fecha</th>
+                <th class="mdl-data-table__cell--non-numeric">Fecha</th>
                 <th>Tirada</th>
-                <th>Motivo</th>
+                <th class="mdl-data-table__cell--non-numeric">Motivo</th>
                 <th class="all border-right-footer"></th>
             </tr>
         </tfoot>
         <tbody>
-            <tr *ngFor="let resultado of resultados">
-                <td [ngClass]="(resultado.enColeccion) ? 'iHaveL' : 'iWishL'">
-                    <img (click)="openDialogoDetalle(resultado.moneda)" src="{{resultado.moneda.imagen}}"/>
+            <tr *ngFor="let moneda of monedas">
+                <td class="mdl-data-table__cell--non-numeric" [ngClass]="(moneda.user_monedas.length > 0) ? 'iHaveL' : 'iWishL'">
+                    <img (click)="openDialogoDetalle(moneda)" src="{{moneda.imagen}}"/>
                 </td>
-                <td>{{resultado.moneda.km}}</td>
-                <td><strong>{{resultado.moneda.fecha_emision | date: 'yyyy'}}, {{resultado.moneda.fecha_emision | date: 'dd MMMM'}}</strong></td>
-                <td>{{resultado.moneda.tirada_unc + resultado.moneda.tirada_bu + resultado.moneda.tirada_proof | number}}</td>
-                <td>{{resultado.moneda.motivo}}</td>
-                <td [ngClass]="(resultado.enColeccion) ? 'iHaveR' : 'iWishR'">
+                <td>{{moneda.km}}</td>
+                <td class="mdl-data-table__cell--non-numeric"><strong>{{moneda.fecha_emision | date: 'yyyy'}}, {{moneda.fecha_emision | date: 'dd MMMM'}}</strong></td>
+                <td>{{moneda.tirada_unc + moneda.tirada_bu + moneda.tirada_proof | number}}</td>
+                <td class="mdl-data-table__cell--non-numeric">{{moneda.motivo}}</td>
+                <td [ngClass]="(moneda.user_monedas.length > 0) ? 'iHaveR' : 'iWishR'">
                     <div class="row">
                         <div class="col">
                             <div class="btn-group-vertical btn-block" role="group" aria-label="Actions">
-                                <button (click)="openDialogoDetalle(resultado.moneda)" md-raised-button color="primary" class="btn btn-sm btn-block"><md-icon class="material-icons">visibility</md-icon> VER DETALLES</button>
-                                <div *ngIf="resultado.enColeccion; then edit else add"></div>
-                                <ng-template #add><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="warn" class="btn btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR</button></ng-template>
-                                <ng-template #edit><button (click)="openDialogoColeccion(resultado.moneda)" md-raised-button color="accent" class="btn btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR</button></ng-template>
+                                <button (click)="openDialogoDetalle(moneda)" md-raised-button color="primary" class="btn btn-sm btn-block"><md-icon class="material-icons">visibility</md-icon> VER DETALLES</button>
+                                <div *ngIf="moneda.user_monedas.length > 0; then edit else add"></div>
+                                <ng-template #add><button (click)="openDialogoColeccion(moneda)" md-raised-button color="warn" class="btn btn-sm btn-block"><md-icon class="material-icons">add</md-icon> AÑADIR</button></ng-template>
+                                <ng-template #edit><button (click)="openDialogoColeccion(moneda)" md-raised-button color="accent" class="btn btn-sm btn-block"><md-icon class="material-icons">edit</md-icon> EDITAR</button></ng-template>
                             </div>
                         </div>
                     </div>

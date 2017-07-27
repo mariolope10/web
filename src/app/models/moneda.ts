@@ -3,6 +3,7 @@ import {Ceca} from "app/models/ceca";
 import {Valor} from "app/models/valor";
 import {Tipo} from "app/models/tipo";
 import {Tematica} from "app/models/tematica";
+import {UserMoneda} from "app/models/user-moneda";
 
 export class Moneda {
     id: number;
@@ -18,6 +19,7 @@ export class Moneda {
     valor: Valor;
     tipo: Tipo;
     tematica: Tematica;
+    user_monedas: Array<UserMoneda>;
     tirada_unc: number;
     tirada_bu: number;
     tirada_proof: number;

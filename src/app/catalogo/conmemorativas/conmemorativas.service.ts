@@ -11,8 +11,8 @@ export class ConmemorativasService {
     
     constructor(private jwtHttp: JwtHttp) {}
 
-    getListadoMonedasPaises(codigo: string): Promise<Array<{moneda: Moneda, enColeccion: boolean}>> {
-        const url = environment.apiEndpoint + "moneda/conmemorativa/pais/" + codigo;
+    getListadoMonedasPaises(codigo: string): Promise<Array<Moneda>> {
+        const url = environment.apiEndpoint + "user/monedas/conmemorativa/pais/" + codigo;
 
         return this.jwtHttp
             .get(url)
@@ -20,17 +20,8 @@ export class ConmemorativasService {
             .toPromise();
     }
     
-    getListadoMonedasAnos(ano: number): Promise<Array<{moneda: Moneda, enColeccion: boolean}>> {
-        const url = environment.apiEndpoint + "moneda/conmemorativa/ano/" + ano;
-
-        return this.jwtHttp
-            .get(url)
-            .map(response => response.json())
-            .toPromise();
-    }
-    
-    getTotalesMonedaEnCatalogoByUser(id: number): Promise<UserMoneda> {
-        const url = environment.apiEndpoint + "user/monedas/" + id;
+    getListadoMonedasAnos(ano: number): Promise<Array<Moneda>> {
+        const url = environment.apiEndpoint + "user/monedas/conmemorativa/ano/" + ano;
 
         return this.jwtHttp
             .get(url)
@@ -39,7 +30,7 @@ export class ConmemorativasService {
     }
     
     addUserMoneda(userMoneda: UserMoneda): Promise<UserMoneda> {
-        const url = environment.apiEndpoint + "user/monedas/";
+        const url = environment.apiEndpoint + "user/moneda";
 
         return this.jwtHttp
             .post(url, userMoneda)
@@ -48,10 +39,19 @@ export class ConmemorativasService {
     }
     
     updateUserMoneda(userMoneda: UserMoneda): Promise<UserMoneda> {
-        const url = environment.apiEndpoint + "user/monedas/";
+        const url = environment.apiEndpoint + "user/moneda";
 
         return this.jwtHttp
             .put(url, userMoneda)
+            .map(response => response.json())
+            .toPromise();
+    }
+    
+    deleteUserMoneda(id: number) {
+        const url = environment.apiEndpoint + "user/moneda/" + id;
+
+        return this.jwtHttp
+            .delete(url)
             .map(response => response.json())
             .toPromise();
     }

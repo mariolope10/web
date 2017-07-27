@@ -38,10 +38,10 @@ export class SeriesResolver implements Resolve<Serie[] | boolean> {
 
 // CARGA DE BASE DE DATOS - CONMEMORATIVAS PAIS
 @Injectable()
-export class ConmemorativasPaisResolver implements Resolve<Array<{moneda: Moneda, enColeccion: boolean}> | boolean> {
+export class ConmemorativasPaisResolver implements Resolve<Array<Moneda> | boolean> {
     constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<Array<{moneda: Moneda, enColeccion: boolean}>> | boolean {
+    resolve(route: ActivatedRouteSnapshot): Promise<Array<Moneda>> | boolean {
         return this.conmemorativasService.getListadoMonedasPaises(route.params.codigo).then(
             listadoConmemorativasPais => {
                 if (listadoConmemorativasPais.length > 0) {
@@ -59,10 +59,10 @@ export class ConmemorativasPaisResolver implements Resolve<Array<{moneda: Moneda
 
 // CARGA DE BASE DE DATOS - CONMEMORATIVAS ANOS
 @Injectable()
-export class ConmemorativasAnosResolver implements Resolve<any> {
+export class ConmemorativasAnosResolver implements Resolve<Array<Moneda> | boolean> {
     constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<any> {
+    resolve(route: ActivatedRouteSnapshot): Promise<Array<Moneda>> | boolean {
         return this.conmemorativasService.getListadoMonedasAnos(route.params.ano).then(
             listadoConmemorativasAnos => {
                 if (listadoConmemorativasAnos.length > 0) {
@@ -99,7 +99,7 @@ export const CatalogoRoutes: Routes = [
                         component: ListadoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
-                            listadoMonedas: ConmemorativasPaisResolver
+                            monedas: ConmemorativasPaisResolver
                         },
                         data: {type: 'type_pais'}
                     },
@@ -113,7 +113,7 @@ export const CatalogoRoutes: Routes = [
                         component: ListadoConmemorativasComponent,
                         canActivate: [CanActivateAuthGuard],
                         resolve: {
-                            listadoMonedas: ConmemorativasAnosResolver
+                            monedas: ConmemorativasAnosResolver
                         },
                         data: {type: 'type_ano'}
                     }

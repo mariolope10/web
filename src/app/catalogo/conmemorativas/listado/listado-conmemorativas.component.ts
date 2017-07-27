@@ -22,7 +22,7 @@ import {LayoutService} from "app/layout/layout.service";
 })
 
 export class ListadoConmemorativasComponent implements OnInit {
-    resultados: Array<{moneda: Moneda, enColeccion: boolean}>;
+    monedas: Array<Moneda>;
     type: string;
     
     header: any;
@@ -37,8 +37,8 @@ export class ListadoConmemorativasComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.data
-            .subscribe((data: {listadoMonedas: Array<{moneda: Moneda, enColeccion: boolean}>, type: string}) => {
-                this.resultados = data.listadoMonedas;
+            .subscribe((data: {monedas: Array<Moneda>, type: string}) => {
+                this.monedas = data.monedas;
                 this.type = data.type;
             });
             
@@ -48,10 +48,10 @@ export class ListadoConmemorativasComponent implements OnInit {
     initCabecera(): void {
         // CABECERA
         if (this.type === "type_pais") {
-            this.header = this.resultados[0].moneda.pais.nombre;
+            this.header = this.monedas[0].pais.nombre;
             
         } else {
-            this.header = this.resultados[0].moneda.ano;
+            this.header = this.monedas[0].ano;
         }
     }
 
@@ -141,7 +141,7 @@ export class ListadoConmemorativasComponent implements OnInit {
 
                 if (listadoConmemorativasPais.length > 0) {
                     this.zone.run(() => {
-                        this.resultados = listadoConmemorativasPais;
+                        this.monedas = listadoConmemorativasPais;
 
                         this.reInitDatatable();
                     });
@@ -163,7 +163,7 @@ export class ListadoConmemorativasComponent implements OnInit {
 
                 if (listadoConmemorativasAno.length > 0) {
                     this.zone.run(() => {
-                        this.resultados = listadoConmemorativasAno;
+                        this.monedas = listadoConmemorativasAno;
                         
                         this.reInitDatatable();
                     });

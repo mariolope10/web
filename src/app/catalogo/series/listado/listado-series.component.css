@@ -29,3 +29,25 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
     background-color: #EF5350;
 }
+
+.iWish {
+    background-color: #EF5350;
+    color: white;
+    cursor: pointer;
+}
+
+.iHave {
+    background-color: #66BB6A;
+    color: white;
+    cursor: pointer;
+}
+
+.notIssued {
+    background-color: #BDBDBD;
+    color: white;
+}
+
+.cell-tirada {
+    display: flex; 
+    align-items: center;
+}

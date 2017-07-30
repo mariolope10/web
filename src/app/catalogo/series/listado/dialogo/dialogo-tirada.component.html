@@ -1,0 +1,24 @@
+<h1 md-dialog-title>Tirada {{moneda.valor.nombre_comun}} {{moneda.pais.nombre}} {{moneda.ano}}</h1>
+<div md-dialog-content class="text-center">
+    <div class="box box-default table-box table-responsive mdl-shadow--2dp">
+        <table class="mdl-data-table">
+            <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>UNC</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_unc | number}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>BU</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_bu | number}}</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"><strong>PROOF</strong></td>
+                    <td class="mdl-data-table">{{moneda.tirada_proof | number}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div md-dialog-actions>
+    <button md-button (click)="dialogRef.close()">CERRAR</button>
+</div>

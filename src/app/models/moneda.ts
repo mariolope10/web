@@ -19,7 +19,7 @@ export class Moneda {
     valor: Valor;
     tipo: Tipo;
     tematica: Tematica;
-    user_monedas: Array<UserMoneda>;
+    user_monedas: UserMoneda[];
     tirada_unc: number;
     tirada_bu: number;
     tirada_proof: number;

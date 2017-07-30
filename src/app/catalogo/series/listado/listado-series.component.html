@@ -13,26 +13,26 @@
                                     <div class="row">
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m1c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m1c)" style="width: 100%" src="{{serie.monedas_ano[0].m1c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[0].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[0])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[0].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m2c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m2c)" style="width: 100%" src="{{serie.monedas_ano[0].m2c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[1].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[1])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[1].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m5c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m5c)" style="width: 100%" src="{{serie.monedas_ano[0].m5c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[2].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[2])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[2].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m10c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m10c)" style="width: 100%" src="{{serie.monedas_ano[0].m10c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[3].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[3])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[3].imagen}}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -41,26 +41,26 @@
                                     <div class="row">
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m20c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m20c)" style="width: 100%" src="{{serie.monedas_ano[0].m20c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[4].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[4])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[4].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m50c.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m50c)" style="width: 100%" src="{{serie.monedas_ano[0].m50c.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[5].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[5])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[5].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m1e.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m1e)" style="width: 100%" src="{{serie.monedas_ano[0].m1e.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[6].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[6])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[6].imagen}}"/>
                                             </div>
                                         </div>
                                         <div class="col-sm-3 col-md-3">
                                             <div class="foto-container">
-                                                <p>{{serie.monedas_ano[0].m2e.valor.nombre_comun}}</p>
-                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].m2e)" style="width: 100%" src="{{serie.monedas_ano[0].m2e.imagen}}"/>
+                                                <p>{{serie.monedas_ano[0].monedas[7].valor.nombre_comun}}</p>
+                                                <img (click)="openDialogoDetalle(serie.monedas_ano[0].monedas[7])" style="width: 100%" src="{{serie.monedas_ano[0].monedas[7].imagen}}"/>
                                             </div>
                                         </div>
                                     </div>      
@@ -98,14 +98,24 @@
                             <tbody>
                                 <tr *ngFor="let tirada of serie.monedas_ano">
                                     <td><strong>{{tirada.ano}}</strong></td>
-                                    <td (click)="openDialogoColeccion(tirada.m1c)">{{tirada.m1c.tirada_unc + tirada.m1c.tirada_bu + tirada.m1c.tirada_proof | number}}
-                                    <td (click)="openDialogoColeccion(tirada.m2c)">{{tirada.m2c.tirada_unc + tirada.m2c.tirada_bu + tirada.m2c.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m5c)">{{tirada.m5c.tirada_unc + tirada.m5c.tirada_bu + tirada.m5c.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m10c)">{{tirada.m10c.tirada_unc + tirada.m10c.tirada_bu + tirada.m10c.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m20c)">{{tirada.m20c.tirada_unc + tirada.m20c.tirada_bu + tirada.m20c.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m50c)">{{tirada.m50c.tirada_unc + tirada.m50c.tirada_bu + tirada.m50c.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m1e)">{{tirada.m1e.tirada_unc + tirada.m1e.tirada_bu + tirada.m1e.tirada_proof | number}}</td>
-                                    <td (click)="openDialogoColeccion(tirada.m2e)">{{tirada.m2e.tirada_unc + tirada.m2e.tirada_bu + tirada.m2e.tirada_proof | number}}</td>
+                                    
+                                    <ng-template ngFor let-moneda [ngForOf]="tirada.monedas">
+                                        <div *ngIf="(moneda.tirada_unc + moneda.tirada_bu + moneda.tirada_proof) == 0; then not_issued else issued"></div>
+                                        <ng-template #not_issued><td class="notIssued">0</td></ng-template>
+                                        <ng-template #issued>
+                                            <td [ngClass]="(moneda.user_monedas.length > 0) ? 'iHave' : 'iWish'">
+                                                <div class="cell-tirada">
+                                                    <span (click)="openDialogoTirada(moneda)">{{moneda.tirada_unc + moneda.tirada_bu + moneda.tirada_proof | number}}</span>
+                                                    <span style="flex: 1 1 auto;"></span>
+                                                    <span (click)="openDialogoColeccion(moneda)">
+                                                        <div *ngIf="moneda.user_monedas.length > 0; then have else wish"></div>
+                                                        <ng-template #wish><i class="fa fa-plus"></i></ng-template>
+                                                        <ng-template #have><i class="fa fa-pencil"></i></ng-template>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </ng-template>
+                                    </ng-template>
                                 </tr>
                             </tbody>
                         </table>

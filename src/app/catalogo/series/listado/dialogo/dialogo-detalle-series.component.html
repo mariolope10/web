@@ -1,9 +1,7 @@
 <h1 md-dialog-title>Detalle {{moneda.valor.nombre_comun}} {{moneda.pais.nombre}}</h1>
 <div md-dialog-content class="text-center">
-    <div class="easyzoom easyzoom--overlay" style="margin-bottom: 20px">
-        <a href="http://pngimg.com/uploads/coin/coin_PNG3553.png">
-            <img class="img-zoom" src="{{moneda.imagen}}" alt="Moneda {{moneda.valor.nombre_comun}}"/>
-        </a>
+    <div id="div-img-zoom">
+        <img class="img-zoom" src="{{moneda.imagen}}" alt="Moneda {{moneda.valor.nombre_comun}}"/>
     </div>
 
     <div class="box box-default table-box table-responsive mdl-shadow--2dp">

@@ -3,22 +3,14 @@ import {MdDialogRef} from "@angular/material";
 import {Moneda} from "app/models/moneda";
 
 @Component({
-    selector: 'dialogo-detalle',
-    styles: [`
-        .img-zoom {
-            max-width: 250px;
-        }
-        #div-img-zoom {
-            margin-bottom: 20px;
-        }
-    `
-    ],
-    templateUrl: './dialogo-detalle-series.component.html'
+    selector: 'dialogo-tirada',
+    styles: [``],
+    templateUrl: './dialogo-tirada.component.html'
 })
-export class DialogoDetalleSeriesComponent {
+export class DialogoTiradaComponent {
     moneda: Moneda;
 
-    constructor(public dialogRef: MdDialogRef<DialogoDetalleSeriesComponent>) {}
+    constructor(public dialogRef: MdDialogRef<DialogoTiradaComponent>) {}
 
     /*imgen: string;
     motivo: string;

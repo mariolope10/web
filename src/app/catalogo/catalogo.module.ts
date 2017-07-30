@@ -20,6 +20,7 @@ import {ListadoSeriesComponent} from "app/catalogo/series/listado/listado-series
 import {SeriesService} from "app/catalogo/series/series.service";
 import {DialogoDetalleSeriesComponent} from "app/catalogo/series/listado/dialogo/dialogo-detalle-series.component";
 import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.component";
+import {DialogoTiradaComponent} from "app/catalogo/series/listado/dialogo/dialogo-tirada.component";
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.
         DialogoDetalleSeriesComponent,
         DialogoDetalleConmemorativasComponent,
         DialogoColeccionComponent,
+        DialogoTiradaComponent,
         SmdFabSpeedDialComponent,
         SmdFabSpeedDialTrigger,
         SmdFabSpeedDialActions,
@@ -48,6 +50,7 @@ import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.
         DialogoDetalleSeriesComponent,
         DialogoDetalleConmemorativasComponent,
         DialogoColeccionComponent,
+        DialogoTiradaComponent,
         ListadoConmemorativasComponent,
         ListadoSeriesComponent,
         SmdFabSpeedDialComponent,

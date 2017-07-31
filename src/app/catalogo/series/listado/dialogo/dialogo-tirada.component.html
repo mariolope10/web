@@ -18,6 +18,8 @@
             </tbody>
         </table>
     </div>
+    <div *ngIf="moneda.comentario; then comentario"></div>
+    <ng-template #comentario><p class="text-left">(*) {{moneda.comentario}}</p></ng-template>
 </div>
 <div md-dialog-actions>
     <button md-button (click)="dialogRef.close()">CERRAR</button>

@@ -8,7 +8,7 @@ import {PortadaComponent} from './portada.component';
 
 import {PortadaLoginComponent} from './login/login.component';
 import {PortadaRegistroComponent} from './sign-up/sign-up.component';
-import {AuthenticationService} from "app/portada/authentication.service";
+import {AuthenticationService} from "./authentication.service";
 
 @NgModule({
     imports: [

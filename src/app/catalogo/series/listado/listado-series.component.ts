@@ -1,9 +1,6 @@
-import {Component, OnInit, NgZone} from '@angular/core';
-import {Serie} from "app/models/serie";
+import {Component, OnInit, NgZone, ElementRef, Inject, ViewChild} from '@angular/core';
 import {MdDialog} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Moneda} from "app/models/moneda";
-import {DialogoDetalleSeriesComponent} from "app/catalogo/series/listado/dialogo/dialogo-detalle-series.component";
 
 import * as jQuery from 'jquery';
 
@@ -11,10 +8,13 @@ import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-responsive';
 import 'datatables.net-fixedcolumns';
-import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.component";
-import {LayoutService} from "app/layout/layout.service";
-import {SeriesService} from "app/catalogo/series/series.service";
-import {DialogoTiradaComponent} from "app/catalogo/series/listado/dialogo/dialogo-tirada.component";
+import {Serie} from "../../../models/serie";
+import {LayoutService} from "../../../layout/layout.service";
+import {Moneda} from "../../../models/moneda";
+import {DialogoDetalleSeriesComponent} from "./dialogo/dialogo-detalle-series.component";
+import {DialogoTiradaComponent} from "./dialogo/dialogo-tirada.component";
+import {DialogoColeccionComponent} from "../../dialogo/dialogo-coleccion.component";
+import {SeriesService} from "../series.service";
 
 @Component({
     selector: 'series',
@@ -26,8 +26,12 @@ export class ListadoSeriesComponent implements OnInit {
     series: Serie[];
 
     tableWidget: any;
+    
+    @ViewChild('tabGroup') tabGroup;
 
-    constructor(private router: Router, private zone: NgZone, private layoutService: LayoutService, public dialog: MdDialog, private route: ActivatedRoute, private seriesService: SeriesService) {}
+    constructor(private elRef:ElementRef, private router: Router, private zone: NgZone, private layoutService: LayoutService, public dialog: MdDialog, private route: ActivatedRoute, private seriesService: SeriesService) {
+        
+    }
 
     ngOnInit(): void {
         this.route.data
@@ -38,6 +42,19 @@ export class ListadoSeriesComponent implements OnInit {
 
     ngAfterViewInit() {
         this.initDatatable();
+        
+        this.tableWidget = this.elRef.nativeElement.querySelectorAll('table');
+        console.log(this.elRef.nativeElement.querySelectorAll('.tabla-monedas'));
+
+        jQuery(document).on('click', ".row-responsive", (e, args) => {
+            var tabIndex = this.tabGroup.selectedIndex;
+            var rowIndex = jQuery(e.currentTarget).attr("data-dt-row");
+            var colIndex = jQuery(e.currentTarget).attr("data-dt-column");
+            
+            let moneda: Moneda = this.series[tabIndex].monedas_ano[parseInt(rowIndex)].monedas[parseInt(colIndex)-1];
+            
+            this.openDialogoTirada(moneda);
+        });
     }
 
     initDatatable(): void {
@@ -54,7 +71,7 @@ export class ListadoSeriesComponent implements OnInit {
                     renderer: function (api, rowIdx, columns) {
                         var data = $.map(columns, function (col, i) {
                             return col.hidden ?
-                                '<div data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                                '<div class="row-responsive" data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
                                 '<div class="text-left"><strong>' + col.title + '</strong></div> ' +
                                 '<div>' + col.data + '</div>' +
                                 '</div>' :
@@ -77,7 +94,7 @@ export class ListadoSeriesComponent implements OnInit {
             ]
         });
     }
-    
+
     reInitDatatable(): void {
         this.tableWidget.destroy();
         this.tableWidget = null;
@@ -90,13 +107,13 @@ export class ListadoSeriesComponent implements OnInit {
         let instance = dialogRef.componentInstance;
         instance.moneda = moneda;
     }
-    
+
     openDialogoTirada(moneda: Moneda) {
         let dialogRef = this.dialog.open(DialogoTiradaComponent);
         let instance = dialogRef.componentInstance;
         instance.moneda = moneda;
     }
-    
+
     openDialogoColeccion(moneda: Moneda) {
         // DIALOGO DE DETALLES DE LA COLECCION DEL USUARIO
         let dialog = this.dialog.open(DialogoColeccionComponent);
@@ -110,7 +127,7 @@ export class ListadoSeriesComponent implements OnInit {
             }
         });
     }
-    
+
     getListadoSeriesByPais(codigo: string): void {
         this.layoutService.updatePreloaderState('active');
 

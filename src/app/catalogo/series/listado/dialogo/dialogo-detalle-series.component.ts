@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
-import {Moneda} from "app/models/moneda";
+import {Moneda} from "../../../../models/moneda";
 
 @Component({
     selector: 'dialogo-detalle',

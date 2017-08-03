@@ -7,20 +7,19 @@ import {CatalogoRoutingModule, ConmemorativasPaisResolver, ConmemorativasAnosRes
 import {CatalogoComponent} from './catalogo.component';
 
 import {SmdFabSpeedDialComponent, SmdFabSpeedDialTrigger, SmdFabSpeedDialActions} from "./../fab-speed-dial/fab-speed-dial";
-
-import {OrderByPipe} from "app/pipes/orderby.pipe";
-import {KeysPipe} from "app/pipes/key.pipe";
-import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
-import {ListadoConmemorativasComponent} from "app/catalogo/conmemorativas/listado/listado-conmemorativas.component";
-import {DialogoDetalleConmemorativasComponent} from "app/catalogo/conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
-import {FiltroPaisConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
-import {FiltroAnoConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
-import {FiltroPaisSeriesComponent} from "app/catalogo/series/filtro-pais/filtro-pais-series.component";
-import {ListadoSeriesComponent} from "app/catalogo/series/listado/listado-series.component";
-import {SeriesService} from "app/catalogo/series/series.service";
-import {DialogoDetalleSeriesComponent} from "app/catalogo/series/listado/dialogo/dialogo-detalle-series.component";
-import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.component";
-import {DialogoTiradaComponent} from "app/catalogo/series/listado/dialogo/dialogo-tirada.component";
+import {FiltroAnoConmemorativasComponent} from "./conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
+import {FiltroPaisConmemorativasComponent} from "./conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
+import {FiltroPaisSeriesComponent} from "./series/filtro-pais/filtro-pais-series.component";
+import {ListadoConmemorativasComponent} from "./conmemorativas/listado/listado-conmemorativas.component";
+import {DialogoDetalleSeriesComponent} from "./series/listado/dialogo/dialogo-detalle-series.component";
+import {DialogoColeccionComponent} from "./dialogo/dialogo-coleccion.component";
+import {DialogoDetalleConmemorativasComponent} from "./conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
+import {ListadoSeriesComponent} from "./series/listado/listado-series.component";
+import {DialogoTiradaComponent} from "./series/listado/dialogo/dialogo-tirada.component";
+import {KeysPipe} from "../pipes/key.pipe";
+import {OrderByPipe} from "../pipes/orderby.pipe";
+import {ConmemorativasService} from "./conmemorativas/conmemorativas.service";
+import {SeriesService} from "./series/series.service";
 
 @NgModule({
     imports: [

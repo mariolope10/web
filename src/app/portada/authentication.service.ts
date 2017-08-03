@@ -4,9 +4,9 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {environment} from "environments/environment";
 import {JwtHttp} from "angular2-jwt-refresh/dist/angular2-jwt-refresh";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthenticationService {

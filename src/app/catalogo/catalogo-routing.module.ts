@@ -2,25 +2,24 @@ import {Routes, RouterModule, Resolve, ActivatedRouteSnapshot, Router} from '@an
 
 import {CatalogoComponent} from './catalogo.component';
 
-import {CanActivateAuthGuard} from "app/can-activate.authguard";
 import {Injectable} from "@angular/core";
-
-import {SeriesService} from "app/catalogo/series/series.service";
-import {Moneda} from "app/models/moneda";
-import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
-import {ListadoConmemorativasComponent} from "app/catalogo/conmemorativas/listado/listado-conmemorativas.component";
-import {FiltroPaisSeriesComponent} from "app/catalogo/series/filtro-pais/filtro-pais-series.component";
-import {ListadoSeriesComponent} from "app/catalogo/series/listado/listado-series.component";
-import {FiltroPaisConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
-import {FiltroAnoConmemorativasComponent} from "app/catalogo/conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
-import {Serie} from "app/models/serie";
+import {Serie} from "../models/serie";
+import {SeriesService} from "./series/series.service";
+import {ConmemorativasService} from "./conmemorativas/conmemorativas.service";
+import {Moneda} from "../models/moneda";
+import {CanActivateAuthGuard} from "../can-activate.authguard";
+import {FiltroPaisConmemorativasComponent} from "./conmemorativas/filtro-pais/filtro-pais-conmemorativas.component";
+import {ListadoConmemorativasComponent} from "./conmemorativas/listado/listado-conmemorativas.component";
+import {FiltroAnoConmemorativasComponent} from "./conmemorativas/filtro-ano/filtro-ano-conmemorativas.component";
+import {FiltroPaisSeriesComponent} from "./series/filtro-pais/filtro-pais-series.component";
+import {ListadoSeriesComponent} from "./series/listado/listado-series.component";
 
 // CARGA DE BASE DE DATOS - SERIES
 @Injectable()
 export class SeriesResolver implements Resolve<Serie[] | boolean> {
     constructor(private seriesService: SeriesService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<Serie[]> | boolean {
+    resolve(route: ActivatedRouteSnapshot): Promise<Serie[] | boolean> {
         return this.seriesService.getListadoSeries(route.params.codigo).then(
             listadoSeries => {
                 if (listadoSeries.length > 0) {
@@ -41,7 +40,7 @@ export class SeriesResolver implements Resolve<Serie[] | boolean> {
 export class ConmemorativasPaisResolver implements Resolve<Array<Moneda> | boolean> {
     constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<Array<Moneda>> | boolean {
+    resolve(route: ActivatedRouteSnapshot): Promise<Moneda[] | boolean> {
         return this.conmemorativasService.getListadoMonedasPaises(route.params.codigo).then(
             listadoConmemorativasPais => {
                 if (listadoConmemorativasPais.length > 0) {
@@ -62,7 +61,7 @@ export class ConmemorativasPaisResolver implements Resolve<Array<Moneda> | boole
 export class ConmemorativasAnosResolver implements Resolve<Array<Moneda> | boolean> {
     constructor(private conmemorativasService: ConmemorativasService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Promise<Array<Moneda>> | boolean {
+    resolve(route: ActivatedRouteSnapshot): Promise<Moneda[] | boolean> {
         return this.conmemorativasService.getListadoMonedasAnos(route.params.ano).then(
             listadoConmemorativasAnos => {
                 if (listadoConmemorativasAnos.length > 0) {

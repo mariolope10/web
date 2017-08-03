@@ -1,9 +1,9 @@
-import {Pais} from "app/models/pais";
-import {Ceca} from "app/models/ceca";
-import {Valor} from "app/models/valor";
-import {Tipo} from "app/models/tipo";
-import {Tematica} from "app/models/tematica";
-import {UserMoneda} from "app/models/user-moneda";
+import {Pais} from "./pais";
+import {Ceca} from "./ceca";
+import {Valor} from "./valor";
+import {Tipo} from "./tipo";
+import {Tematica} from "./tematica";
+import {UserMoneda} from "./user-moneda";
 
 export class Moneda {
     id: number;

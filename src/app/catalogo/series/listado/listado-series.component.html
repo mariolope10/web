@@ -2,7 +2,7 @@
     <div class="page-title">
         <h2>Series de {{series[0].pais.nombre}}</h2>
     </div>
-    <md-tab-group>
+    <md-tab-group #tabGroup>
         <md-tab *ngFor="let serie of series" label="({{serie.fecha_desde}} - {{serie.fecha_hasta}})">
             <article class="article">
                 <div class="box box-default">

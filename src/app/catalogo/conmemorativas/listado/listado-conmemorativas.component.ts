@@ -1,5 +1,4 @@
 import {Component, OnInit, NgZone} from '@angular/core';
-import {Moneda} from "app/models/moneda";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {MdDialog} from "@angular/material";
@@ -9,11 +8,11 @@ import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-responsive';
 import 'datatables.net-fixedcolumns';
-
-import {DialogoDetalleConmemorativasComponent} from "app/catalogo/conmemorativas/listado/dialogo/dialogo-detalle-conmemorativas.component";
-import {DialogoColeccionComponent} from "app/catalogo/dialogo/dialogo-coleccion.component";
-import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
-import {LayoutService} from "app/layout/layout.service";
+import {Moneda} from "../../../models/moneda";
+import {LayoutService} from "../../../layout/layout.service";
+import {DialogoDetalleConmemorativasComponent} from "./dialogo/dialogo-detalle-conmemorativas.component";
+import {DialogoColeccionComponent} from "../../dialogo/dialogo-coleccion.component";
+import {ConmemorativasService} from "../conmemorativas.service";
 
 @Component({
     selector: 'listado-conmemorativas',

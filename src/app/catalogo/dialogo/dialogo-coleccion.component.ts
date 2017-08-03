@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {MdDialogRef, MdSnackBar} from "@angular/material";
-
-import {ConmemorativasService} from "app/catalogo/conmemorativas/conmemorativas.service";
-import {UserMoneda} from "app/models/user-moneda";
-import {Moneda} from "app/models/moneda";
+import {Moneda} from "../../models/moneda";
+import {UserMoneda} from "../../models/user-moneda";
+import {ConmemorativasService} from "../conmemorativas/conmemorativas.service";
 
 @Component({
     selector: 'dialogo-coleccion',

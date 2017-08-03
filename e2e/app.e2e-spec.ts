@@ -1,14 +1,14 @@
-import { MaterialesPage } from './app.po';
+import { WebPage } from './app.po';
 
-describe('materiales App', () => {
-  let page: MaterialesPage;
+describe('web App', () => {
+  let page: WebPage;
 
   beforeEach(() => {
-    page = new MaterialesPage();
+    page = new WebPage();
   });
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

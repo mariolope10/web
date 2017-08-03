@@ -49,10 +49,10 @@ import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import {Http, RequestOptions, Response} from '@angular/http';
 import {AuthConfig} from 'angular2-jwt';
 import {JwtConfigService, JwtHttp} from 'angular2-jwt-refresh';
-import {CanActivateAuthGuard} from "app/can-activate.authguard";
-import {environment} from "environments/environment";
-import {SecurePipe} from "app/pipes/secure.pipe";
-import {UrlHelperService} from "app/layout/url-helper.service";
+import {SecurePipe} from "./pipes/secure.pipe";
+import {CanActivateAuthGuard} from "./can-activate.authguard";
+import {UrlHelperService} from "./layout/url-helper.service";
+import {environment} from "./../environments/environment";
 
 @NgModule({
     imports: [

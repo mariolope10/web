@@ -1,9 +1,8 @@
 import {Component, AfterViewInit} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
-import {Moneda} from "app/models/moneda";
 
 import * as jQuery from 'jquery';
-import 'easyzoom';
+import {Moneda} from "../../../../models/moneda";
 
 @Component({
     selector: 'dialogo-detalle',

@@ -5,8 +5,9 @@ import {LayoutComponent} from './layout/layout.component';
 
 // Page Layouts
 import {PageLayoutFullscreenComponent} from './page-layouts/fullscreen/fullscreen.component';
-import {PortadaComponent} from "app/portada/portada.component";
-import {CanActivateAuthGuard} from "app/can-activate.authguard";
+import {PortadaComponent} from "./portada/portada.component";
+import {CanActivateAuthGuard} from "./can-activate.authguard";
+
 
 const AppRoutes: Routes = [
     {path: '', redirectTo: '/portada/login', pathMatch: 'full'},

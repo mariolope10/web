@@ -1,5 +1,3 @@
-import * as jQuery from 'jquery';
-
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';

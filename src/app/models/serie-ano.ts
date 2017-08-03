@@ -1,4 +1,4 @@
-import {Moneda} from "app/models/moneda";
+import {Moneda} from "./moneda";
 
 export class SerieAno {
     id: number;

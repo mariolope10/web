@@ -7,6 +7,7 @@
         {
             "root": "src",
             "outDir": "dist",
+            "deployUrl": "",
             "assets": [
                 "assets",
                 "vendors",
@@ -28,7 +29,6 @@
                 "styles/material2-theme.scss",
                 "styles/theme.scss",
                 "styles/ui.scss",
-                "../node_modules/easyzoom/css/easyzoom.css",
                 "styles/dataTables.material.min.css",
                 "../node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
                 "../node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
@@ -37,7 +37,6 @@
             ],
             "scripts": [
                 "../node_modules/jquery/dist/jquery.min.js",
-                "../node_modules/easyzoom/dist/easyzoom.js",
                 "../node_modules/datatables.net/js/jquery.dataTables.js",
                 "../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js",
                 "../node_modules/datatables.net-buttons/js/dataTables.buttons.js",

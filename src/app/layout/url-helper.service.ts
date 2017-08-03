@@ -3,7 +3,7 @@ import {ResponseContentType} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {JwtHttp} from "angular2-jwt-refresh/dist/angular2-jwt-refresh";
-import {environment} from "environments/environment";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class UrlHelperService {

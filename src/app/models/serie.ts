@@ -1,5 +1,5 @@
-import {Pais} from "app/models/pais";
-import {SerieAno} from "app/models/serie-ano";
+import {Pais} from "./pais";
+import {SerieAno} from "./serie-ano";
 
 export class Serie {
     id: number;

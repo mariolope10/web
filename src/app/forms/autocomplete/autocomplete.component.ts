@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'my-form-autocomplete',
@@ -69,11 +71,11 @@ export class FormAutocompleteComponent {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
         .startWith(null)
-        .map((name) => this.filterStates(name));
+        .map(name => this.filterStates(name));
   }
 
   filterStates(val: string) {
-    return val ? this.states.filter((s) => new RegExp(`^${val}`, 'gi').test(s))
+    return val ? this.states.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
                : this.states;
   }
 

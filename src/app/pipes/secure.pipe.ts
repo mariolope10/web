@@ -12,7 +12,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
 
 import {DomSanitizer} from '@angular/platform-browser';
-import {UrlHelperService} from "app/layout/url-helper.service";
+import {UrlHelperService} from "../layout/url-helper.service";
 
 
 // Using similarity from AsyncPipe to avoid having to pipe |secure|async in HTML.

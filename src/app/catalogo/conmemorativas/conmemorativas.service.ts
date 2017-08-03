@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {JwtHttp} from 'angular2-jwt-refresh';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import {environment} from "environments/environment";
-import {Moneda} from "app/models/moneda";
-import {UserMoneda} from "app/models/user-moneda";
+import {environment} from "../../../environments/environment";
+import {Moneda} from "../../models/moneda";
+import {UserMoneda} from "../../models/user-moneda";
 
 @Injectable()
 export class ConmemorativasService {
